@@ -1,6 +1,6 @@
 ########### Python 3.2 #############
 import urllib.request, json
-print('Hello')
+# print('Hello')
 try:
     url = "https://apimgw.aeso.ca/public/systemmarginalprice-api/v1.1/price/systemMarginalPrice?startDate=2022-01-01&endDate=2022-02-01"
 
@@ -23,7 +23,7 @@ try:
     json_data = json.loads(response_data)
     
     # Save the JSON data to a file
-    with open('marginal_price.json', 'w') as json_file:
+    with open('./data/marginal_price.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
 except Exception as e:

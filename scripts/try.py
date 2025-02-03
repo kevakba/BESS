@@ -23,7 +23,7 @@ try:
     json_data = json.loads(response_data)
     
     # Save the JSON data to a file
-    with open('response.json', 'w') as json_file:
+    with open('./data/response.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
     
     # Print the JSON data
