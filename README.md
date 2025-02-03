@@ -4,6 +4,7 @@
 
 - `data/`: Contains JSON data files.
 - `scripts/`: Contains Python scripts.
+- `secret/`: API keys and others
 - `.gitignore`: Specifies files to be ignored by Git.
 - `README.md`: Project documentation.
 
