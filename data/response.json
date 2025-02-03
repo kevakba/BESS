@@ -1,0 +1,90 @@
+{
+    "timestamp": "2025-02-03 02:20:03.843+0000",
+    "responseCode": "200",
+    "return": {
+        "last_updated_datetime_utc": "2025-02-03 02:19",
+        "last_updated_datetime_mpt": "2025-02-02 19:19",
+        "total_max_generation_capability": 23122,
+        "total_net_generation": 12219,
+        "net_to_grid_generation": 9393,
+        "net_actual_interchange": 188,
+        "alberta_internal_load": 12031,
+        "contingency_reserve_required": 557,
+        "dispatched_contigency_reserve_total": 571,
+        "dispatched_contingency_reserve_gen": 492,
+        "dispatched_contingency_reserve_other": 79,
+        "ffr_armed_dispatch": 0,
+        "ffr_offered_volume": 149,
+        "long_lead_time_volume": 1196,
+        "generation_data_list": [
+            {
+                "fuel_type": "COGENERATION",
+                "aggregated_maximum_capability": 6090,
+                "aggregated_net_generation": 5140,
+                "aggregated_dispatched_contingency_reserve": 10
+            },
+            {
+                "fuel_type": "COMBINED CYCLE",
+                "aggregated_maximum_capability": 3942,
+                "aggregated_net_generation": 3319,
+                "aggregated_dispatched_contingency_reserve": 6
+            },
+            {
+                "fuel_type": "ENERGY STORAGE",
+                "aggregated_maximum_capability": 190,
+                "aggregated_net_generation": 0,
+                "aggregated_dispatched_contingency_reserve": 165
+            },
+            {
+                "fuel_type": "GAS FIRED STEAM",
+                "aggregated_maximum_capability": 3078,
+                "aggregated_net_generation": 983,
+                "aggregated_dispatched_contingency_reserve": 75
+            },
+            {
+                "fuel_type": "HYDRO",
+                "aggregated_maximum_capability": 894,
+                "aggregated_net_generation": 131,
+                "aggregated_dispatched_contingency_reserve": 236
+            },
+            {
+                "fuel_type": "OTHER",
+                "aggregated_maximum_capability": 444,
+                "aggregated_net_generation": 286,
+                "aggregated_dispatched_contingency_reserve": 0
+            },
+            {
+                "fuel_type": "SIMPLE CYCLE",
+                "aggregated_maximum_capability": 984,
+                "aggregated_net_generation": 597,
+                "aggregated_dispatched_contingency_reserve": 0
+            },
+            {
+                "fuel_type": "SOLAR",
+                "aggregated_maximum_capability": 1812,
+                "aggregated_net_generation": 0,
+                "aggregated_dispatched_contingency_reserve": 0
+            },
+            {
+                "fuel_type": "WIND",
+                "aggregated_maximum_capability": 5688,
+                "aggregated_net_generation": 1763,
+                "aggregated_dispatched_contingency_reserve": 0
+            }
+        ],
+        "interchange_list": [
+            {
+                "path": "British Columbia",
+                "actual_flow": 202
+            },
+            {
+                "path": "Montana",
+                "actual_flow": -14
+            },
+            {
+                "path": "Saskatchewan",
+                "actual_flow": 0
+            }
+        ]
+    }
+}
