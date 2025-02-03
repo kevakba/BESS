@@ -21,7 +21,6 @@ Model Inferencing:
 download data for Dec 2024
 train ML model to predict price using variables solar, wind and demand
 
-
 links:
 https://developer-apim.aeso.ca/apis	
 
