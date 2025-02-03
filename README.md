@@ -18,19 +18,21 @@
 		- actual wind production:
 
 ## Model Inferencing:
-	demand:
-		accurately being predicted for next 24 hours
+	- demand:
+		- accurately being predicted for next 24 hours
 
-	electricity price:
+	- electricity price:
 		
-	supply:
-		solar: accurately being predicted for next 24 hours
-		wind: accurately being predicted for next 24 hours
+	- supply:
+		- solar: accurately being predicted for next 24 hours
+		- wind: accurately being predicted for next 24 hours
 
-download data for Dec 2024
-train ML model to predict price using variables solar, wind and demand
+## Tasks:
+- download data for Dec 2024
+- train ML model to predict price using variables solar, wind and demand
 
-links:
+## links:
+
 https://developer-apim.aeso.ca/apis	
 
 http://ets.aeso.ca/
