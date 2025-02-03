@@ -8,14 +8,14 @@
 - `README.md`: Project documentation.
 
 ## Hypotehsis:
-	Can we predict electricity price from solar, wind and demand prediction?
+- Can we predict electricity price from solar, wind and demand prediction?
 
 ## Model Training: 
-	Data:
-		actual demand: have a python script which fetch actual and predicted alberta_internal_load data on hourly basis
-		actual electricity price: have a python script which fetch actual & predicted price data on hourly basis
-		actual solar production:
-		actual wind production:
+	- Data:
+		- actual demand: have a python script which fetch actual and predicted alberta_internal_load data on hourly basis
+		- actual electricity price: have a python script which fetch actual & predicted price data on hourly basis
+		- actual solar production:
+		- actual wind production:
 
 ## Model Inferencing:
 	demand:
