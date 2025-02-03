@@ -9,21 +9,41 @@
 - `README.md`: Project documentation.
 
 ## Hypotehsis:
-- Can we predict electricity price from solar, wind and demand prediction?
+- Can we predict `electricity price` from `generation (solar, wind, gas & hydro)` and `demand (AIL)` and `inter_tie (MATL, BC, SK)` prediction?
 
 ## Model Training: 
 	- Data:
-		- actual demand: have a python script which fetch actual and predicted alberta_internal_load data on hourly basis
-		- actual electricity price: have a python script which fetch actual & predicted price data on hourly basis
-		- actual solar production:
-		- actual wind production:
+        Targer Variable:
+            - actual electricity price: have a python script which fetch actual & predicted price data on hourly basis (CAD/MWH)
+
+        Independent Variables:
+            - actual demand (AIL): history present & predicted present
+            - actual solar production: history present & predicted present
+            - actual wind production: history present & predicted present
+            - Others_proxy: history present & predicted present
+            - temperature_Calgary: history present & predicted present
+            - temperature_Edmonton: history present & predicted present
+            - temperature_FortMacmurrey: history present & predicted present
+
+            - inter_tie: history present (non-tested) but not sure of predicted data (model required)
+
+            - actual gas production: 
+            - actual hydro production: 
+            
+
+                        "MC": Maximum Capacity
+                        "MBO OUT": 
+                        "OP OUT": Hourly generation
+                        "AC": Available Capacity
+                                MC = OP OUT +  AC 
+                                Others_proxy = predicted_AIL - predicted_solar - predicted_wind
 
 ## Model Inferencing:
 	- demand:
 		- accurately being predicted for next 24 hours
 
 	- electricity price:
-		
+
 	- supply:
 		- solar: accurately being predicted for next 24 hours
 		- wind: accurately being predicted for next 24 hours
@@ -41,3 +61,5 @@ http://ets.aeso.ca/
 https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data
 
 https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5
+
+generation_report_live: http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet
