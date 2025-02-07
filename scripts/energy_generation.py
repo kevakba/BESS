@@ -2,7 +2,7 @@
 import urllib.request, json
 # print('Hello')
 try:
-    url = "https://apimgw.aeso.ca/public/aiesgencapacity-api/v1/AIESGenCapacity?startDate=2022-01-01&endDate=2022-02-01"
+    url = "https://apimgw.aeso.ca/public/aiesgencapacity-api/v1/AIESGenCapacity?startDate=2024-06-01&endDate=2024-12-31"
 
     hdr ={
     # Request headers
@@ -21,9 +21,9 @@ try:
 
     # Parse the response data as JSON
     json_data = json.loads(response_data)
-    
+    print('here')
     # Save the JSON data to a file
-    with open('./data/energy_generation.json', 'w') as json_file:
+    with open('/home/kevin/Downloads/BESS/data/energy_generation_01062024_31122024.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
 except Exception as e:

@@ -13,6 +13,8 @@
 
 ## Model Training: 
 	- Data:
+        Get the data for past 6 month (01062024 - 31122024s)
+
         Targer Variable:
             - actual electricity price: have a python script which fetch actual & predicted price data on hourly basis (CAD/MWH)
 
@@ -20,7 +22,7 @@
             - actual demand (AIL): history present & predicted present
             - actual solar production: history present & predicted present
             - actual wind production: history present & predicted present
-            - Others_proxy: history present & predicted present
+            - Others_proxy (proxy = AIL - solar - wind): history present & predicted present (for later use)
             - temperature_Calgary: history present & predicted present
             - temperature_Edmonton: history present & predicted present
             - temperature_FortMacmurrey: history present & predicted present
@@ -29,7 +31,6 @@
 
             - actual gas production: 
             - actual hydro production: 
-            
 
                         "MC": Maximum Capacity
                         "MBO OUT": 

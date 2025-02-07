@@ -2,7 +2,7 @@
 import urllib.request, json
 # print('Hello')
 try:
-    url = "https://apimgw.aeso.ca/public/actualforecast-api/v1/load/albertaInternalLoad?startDate=2022-01-01&endDate=2022-02-01"
+    url = "https://apimgw.aeso.ca/public/actualforecast-api/v1/load/albertaInternalLoad?startDate=2024-06-01&endDate=2024-12-31"
 
     hdr ={
     # Request headers
@@ -23,8 +23,9 @@ try:
     json_data = json.loads(response_data)
     
     # Save the JSON data to a file
-    with open('./data/AIL.json', 'w') as json_file:
+    with open('/home/kevin/Downloads/BESS/data/AIL_01062024_31122024.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 except Exception as e:
     print(e)
+
 ####################################
