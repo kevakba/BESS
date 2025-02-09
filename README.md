@@ -59,12 +59,8 @@
 
 ## links:
 
-    https://developer-apim.aeso.ca/apis	
-
-    http://ets.aeso.ca/
-
-    https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data
-
-    https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5
-
-    generation_report_live: http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet
+- [AESO Developer API](https://developer-apim.aeso.ca/apis)
+- [AESO ETS](http://ets.aeso.ca/)
+- [AESO Historical Generation Data](https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data)
+- [AESO Box](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5)
+- [Generation Report Live](http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet)
