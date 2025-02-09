@@ -17,7 +17,7 @@
 
 ## Model Training: 
 	- Data:
-        Get the data for past 6 month (01062024 - 31122024s)
+        Get the data for past 6 month (01/06/2024 - 31/12/2024)
 
         Targer Variable:
             - actual electricity price: have a python script which fetch actual & predicted price data on hourly basis (CAD/MWH)

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 # Define the start and end dates
 start_date = datetime(2024, 6, 1)
-end_date = datetime(2024, 12, 31)
+end_date = datetime(2024, 6, 1)
 
 # Function to get the last day of the month
 def last_day_of_month(date):
