@@ -36,11 +36,11 @@
             - actual gas production: Others_proxy would takre care
             - actual hydro production: Others_proxy would takre care
 
-                        "MC": Maximum Capacity
-                        "MBO OUT": 
-                        "OP OUT": Hourly generation
+                        "MC": Maximum Capability
+                        "MBO OUT": Mothball (MBO) outage
+                        "OP OUT": Operational (OP) outage 
                         "AC": Available Capacity
-                                MC = OP OUT +  AC 
+                                AC = MC - (MBO OUT + OP OUT)
                                 Others_proxy = predicted_AIL - predicted_solar - predicted_wind
 
 ## Model Inferencing:
