@@ -2,10 +2,14 @@
 
 ## Project Structure
 
-- `data/`: Contains JSON data files.
+- `data/`: Contains JSON/csv data files.
 - `scripts/`: Contains Python scripts.
+- `Notebooks/`: Contains Notebooks.
+- `docker/`: Contains docker files.
 - `secret/`: API keys and others
 - `.gitignore`: Specifies files to be ignored by Git.
+- `.venv/`: Contains virtual environment.
+- `requirements.txt`: contains python package requirements information.
 - `README.md`: Project documentation.
 
 ## Hypotehsis:
@@ -27,10 +31,10 @@
             - temperature_Edmonton: history present & predicted present
             - temperature_FortMacmurrey: history present & predicted present
 
-            - inter_tie: history present (non-tested) but not sure of predicted data (model required)
+            - inter_tie: history present (non-tested) but not sure of predicted data (model required it for inferencing)
 
-            - actual gas production: 
-            - actual hydro production: 
+            - actual gas production: Others_proxy would takre care
+            - actual hydro production: Others_proxy would takre care
 
                         "MC": Maximum Capacity
                         "MBO OUT": 
@@ -50,17 +54,17 @@
 		- wind: accurately being predicted for next 24 hours
 
 ## Tasks:
-- download data for Dec 2024
-- train ML model to predict price using variables solar, wind and demand
+    - download data for Dec 2024
+    - train ML model to predict price using variables solar, wind and demand
 
 ## links:
 
-https://developer-apim.aeso.ca/apis	
+    https://developer-apim.aeso.ca/apis	
 
-http://ets.aeso.ca/
+    http://ets.aeso.ca/
 
-https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data
+    https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data
 
-https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5
+    https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5
 
-generation_report_live: http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet
+    generation_report_live: http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet

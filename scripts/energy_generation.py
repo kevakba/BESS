@@ -26,6 +26,9 @@ try:
     with open('/home/kevin/Downloads/BESS/data/energy_generation_01062024_31122024.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
+except urllib.error.HTTPError as e:
+    print(f"HTTP error: {e.code} - {e.reason}")
+except urllib.error.URLError as e:
+    print(f"URL error: {e.reason}")
 except Exception as e:
-    print(e)
-####################################
+    print(f"Unexpected error: {e}")
