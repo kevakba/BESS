@@ -64,3 +64,5 @@
 - [AESO Historical Generation Data](https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data)
 - [AESO Box](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5)
 - [Generation Report Live](http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet)
+- [Historical Generation Data](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5/folder/196731538687)
+
