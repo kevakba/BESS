@@ -1,9 +1,0 @@
-fuel_type = HYDRO
-
-fuel_type = WIND
-
-fuel_type = SOLAR
-
-fuel_type = GAS
-
-
