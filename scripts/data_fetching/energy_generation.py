@@ -40,7 +40,7 @@ while current_date <= end_date:
         print('Data fetched successfully')
 
         # Save the JSON data to a file
-        file_name = f'/home/kevin/Downloads/BESS/data/energy_generation_{startDate.replace("-", "")}_{endDate.replace("-", "")}.json'
+        file_name = f'/home/kevin/Downloads/BESS/data/raw/energy_generation_{startDate.replace("-", "")}_{endDate.replace("-", "")}.json'
         with open(file_name, 'w') as json_file:
             json.dump(json_data, json_file, indent=4)
         print(f"Data saved to {file_name}")
