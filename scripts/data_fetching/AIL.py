@@ -1,5 +1,6 @@
 import urllib.request
 import json
+import pandas as pd
 
 # Define start_date and end_date
 start_date = '2024-01-01'
@@ -26,9 +27,20 @@ try:
     # Parse the response data as JSON
     json_data = json.loads(response_data)
     
-    # Save the JSON data to a file
-    output_file = f'/home/kevin/Downloads/BESS/data/raw/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.json'
-    with open(output_file, 'w') as json_file:
-        json.dump(json_data, json_file, indent=4)
+    df = pd.DataFrame(json_data)
+
+    # Initialize an empty DataFrame to store the output
+    out = pd.DataFrame()
+
+    # Flatten the JSON data using the 'return' column
+    flattened_data = pd.json_normalize(df['return'])
+    flattened_data = flattened_data.T
+    out['begin_datetime_mpt'] = flattened_data[0].apply(lambda x: x['begin_datetime_mpt'])
+    out['alberta_internal_load'] = flattened_data[0].apply(lambda x: x['alberta_internal_load'])
+    out['forecast_alberta_internal_load'] = flattened_data[0].apply(lambda x: x['forecast_alberta_internal_load'])
+
+
+    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
+
 except Exception as e:
     print(e)
