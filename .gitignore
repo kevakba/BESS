@@ -16,3 +16,6 @@ __pycache__/
 
 # catboost
 Notebooks/catboost_info
+
+# large data files
+large_files/
