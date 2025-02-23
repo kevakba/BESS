@@ -57,6 +57,10 @@
     - download data for Dec 2024
     - train ML model to predict price using variables solar, wind and demand
 
+
+## Performance Goal:
+    - price >200: try to make good performance (MAE < 50)
+
 ## links:
 
 - [AESO Developer API](https://developer-apim.aeso.ca/apis)
