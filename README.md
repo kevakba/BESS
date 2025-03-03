@@ -63,6 +63,7 @@
         - price > 200: try to make good performance (MAE < 50) 
         - 120 < price <= 200: try to keep (MAE < 50)
         - price < 120: try to keep (MAE < 30)
+        
     - Low prices, the model will require high accuracy.
 
     - Several factors causing the price spikes:
