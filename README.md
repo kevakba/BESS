@@ -78,7 +78,6 @@
     - we have LSTM model which can predict electricity price for next 24 hours with good performance
     
 
-
 ## To Do:
     - create inferencing script such that it fetch the required data and predict electricty price for next 24 hours
     - host the inferencing script and make it run daily to predict for next 24 hours
