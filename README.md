@@ -59,13 +59,13 @@
 
 
 ## Performance Goal:
-    High prices (>200 $/MWh) will require hig precision (Target > 70%) and high recall (Target > 70%)
-    - price > 200: try to make good performance (MAE < 50) 
-    - 120 < price <= 200: try to keep (MAE < 50)
-    - price < 120: try to keep (MAE < 30)
-    For low prices, the model will require high accuracy.
+    - High prices (>200 $/MWh) will require high precision (Target > 70%) and high recall (Target > 70%)
+        - price > 200: try to make good performance (MAE < 50) 
+        - 120 < price <= 200: try to keep (MAE < 50)
+        - price < 120: try to keep (MAE < 30)
+    - Low prices, the model will require high accuracy.
 
-        Several factors causing the price spikes:
+    - Several factors causing the price spikes:
         - Tight supply cushion (low renewable power penetration net to the grid with high demand)
         - Available transfer capacity on interties
         - High AIL  
