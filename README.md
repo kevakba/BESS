@@ -19,7 +19,7 @@
 	- Data:
         Get the data for past 6 month (01/06/2024 - 31/12/2024)
 
-        Targer Variable:
+        Target Variable:
             - actual electricity price: have a python script which fetch actual & predicted price data on hourly basis (CAD/MWH)
 
         Independent Variables:
@@ -63,7 +63,7 @@
         - price > 200: try to make good performance (MAE < 50) 
         - 120 < price <= 200: try to keep (MAE < 50)
         - price < 120: try to keep (MAE < 30)
-        
+
     - Low prices, the model will require high accuracy.
 
     - Several factors causing the price spikes:
@@ -73,6 +73,16 @@
         - Extreme weather conditions
         - Unexpected major outages such as large generating assets going offline, and transmission congestion due to faults/maintenance outages in the Alberta Interconnected Electric System.
 
+
+## Current Status:
+    - we have LSTM model which can predict electricity price for next 24 hours with good performance
+    
+
+
+## To Do:
+    - create inferencing script such that it fetch the required data and predict electricty price for next 24 hours
+    - host the inferencing script and make it run daily to predict for next 24 hours
+    - store the daily inferencing results and check the performance against the actual electricity price
 
 
 ## links:
