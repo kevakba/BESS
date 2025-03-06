@@ -4,8 +4,8 @@ from datetime import datetime
 import pandas as pd
 
 # Define start_date and end_date as datetime objects
-start_date = '2025-03-05'
-end_date = '2025-03-05'
+start_date = '2025-03-06'
+end_date = '2025-03-06'
 
 try:
     # Construct the URL with the provided dates
@@ -36,7 +36,7 @@ try:
 
     # Flatten the JSON data using the 'return' column
     flattened_data = pd.json_normalize(df['return']['Pool Price Report'])
-
+    # print(flattened_data)
     out['begin_datetime_mpt'] = flattened_data['begin_datetime_mpt']
     out['forecast_pool_price'] = flattened_data['forecast_pool_price']
     out['rolling_30day_avg'] = flattened_data['rolling_30day_avg']

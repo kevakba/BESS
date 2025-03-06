@@ -20,17 +20,15 @@ def get_hourly_temperature(climate_id, start_date, end_date):
 
     try:
         response = requests.get(url, params=params)
+        print(response.json())
         response.raise_for_status()
         data = response.json()
-        # print(data)
         if not data['features']:
           break
-        # for f in data['features']:
-        #    print(f)
         for feature in data['features']:
             properties = feature['properties']
             all_temp_data.append({
-                # 'Timestamp_utc': pd.to_datetime(properties['UTC_DATE'], utc=True),
+  
                 'Timestamp_mst': pd.to_datetime(properties['LOCAL_DATE']),
                 'Temperature (degree C)': properties.get('TEMP', None)
             })
@@ -55,14 +53,18 @@ def get_hourly_temperature(climate_id, start_date, end_date):
 # FORT MC ID: 3062696
 climate_id = "3031092" 
 
-start_date = "2025-03-05T00:00:00Z"
+start_date = "2025-03-06T00:00:00Z"
 
-end_date = "2025-03-05T23:00:00Z"
+end_date = "2025-03-06T23:00:00Z"
 
-# print(start_date.split("T")[0].replace("-", ""))
-# print(end_date.split("T")[0].replace("-", ""))
 df = get_hourly_temperature(climate_id, start_date, end_date)
-# print(df)
+
 df.to_csv(f'/home/kevin/Downloads/BESS/data/raw/forecast/temperature_calgary_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
+
+
+
+
+
+
 
 
