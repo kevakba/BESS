@@ -12,6 +12,12 @@
 - `requirements.txt`: contains python package requirements information.
 - `README.md`: Project documentation.
 
+## Environment Steup:
+- create virtual environment: python3 -m venv bess_venv
+- activate virtual environment: source bess_venv/bin/activate
+- install requirements: pip install -r requirements.txt
+
+
 ## Hypotehsis:
 - Can we predict `electricity price` from `generation (solar, wind, gas & hydro)` and `demand (AIL)` and `inter_tie (MATL, BC, SK)` prediction?
 

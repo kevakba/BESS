@@ -4,8 +4,8 @@ from datetime import datetime
 import pandas as pd
 
 # Define start_date and end_date as datetime objects
-start_date = '2021-01-01'
-end_date = '2021-12-31'
+start_date = '2022-01-01'
+end_date = '2022-12-31'
 
 try:
     # Construct the URL with the provided dates
@@ -33,16 +33,21 @@ try:
 
     # Initialize an empty DataFrame to store the output
     out = pd.DataFrame()
-
+    # print(df)
     # Flatten the JSON data using the 'return' column
-    flattened_data = pd.json_normalize(df['return'])
-    flattened_data = flattened_data.T
-    out['begin_datetime_mpt'] = flattened_data[0].apply(lambda x: x['begin_datetime_mpt'])
-    out['pool_price'] = flattened_data[0].apply(lambda x: x['pool_price'])
-    out['forecast_pool_price'] = flattened_data[0].apply(lambda x: x['forecast_pool_price'])
-    out['rolling_30day_avg'] = flattened_data[0].apply(lambda x: x['rolling_30day_avg'])
+    flattened_data = pd.json_normalize(df['return']['Pool Price Report'])
 
-    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw_2/price_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
+    # flattened_data = flattened_data.T
+    # out['begin_datetime_mpt'] = flattened_data[0].apply(lambda x: x['begin_datetime_mpt'])
+    # out['pool_price'] = flattened_data[0].apply(lambda x: x['pool_price'])
+    # out['forecast_pool_price'] = flattened_data[0].apply(lambda x: x['forecast_pool_price'])
+    # out['rolling_30day_avg'] = flattened_data[0].apply(lambda x: x['rolling_30day_avg'])
+    out['begin_datetime_mpt'] = flattened_data['begin_datetime_mpt']
+    out['pool_price'] = flattened_data['pool_price']
+    out['forecast_pool_price'] = flattened_data['forecast_pool_price']
+    out['rolling_30day_avg'] = flattened_data['rolling_30day_avg']
+    # print(out.head())
+    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2022/price_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
 
 except Exception as e:
     print(e)
