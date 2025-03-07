@@ -13,9 +13,10 @@
 - `README.md`: Project documentation.
 
 ## Environment Steup:
-- create virtual environment: python3 -m venv bess_venv
-- activate virtual environment: source bess_venv/bin/activate
-- install requirements: pip install -r requirements.txt
+- create virtual environment: `python3 -m venv bess_venv`
+- activate virtual environment: `source bess_venv/bin/activate`
+- install requirements: `pip install -r requirements.txt`
+- to updated the requirement.txt file: `pip freeze > requirements.txt`
 
 
 ## Hypotehsis:
