@@ -19,4 +19,4 @@ bess_venv/
 Notebooks/catboost_info
 
 # large data files
-large_files/
+data/large_files/
