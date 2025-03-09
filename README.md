@@ -49,14 +49,17 @@ Can we predict `electricity price` for the next 24 hours?
 
 
 ## Model Training: 
+|  | Time Series Model| Regression Model |
+|-----------------------------|-----------------------------|----------------------|
+| Name                | TS_Model                | REG_model       |
+| Model                | LSTM_Window                | LSTM       |
+| Data               | Past data                | Forecast data       |
+| Training frequency               | Weekly                | Weekly       |
 
 
 ## Model Inferencing:
-
-
-## Tasks:
-    - download data for Dec 2024
-    - train ML model to predict price using variables solar, wind and demand
+- For every hour `h`, get pool price prediction from TS_Model & REG_model for `h+1` till `h+24`
+- Weighted Average the response from both the models
 
 
 ## Performance Goal:
@@ -78,15 +81,14 @@ Can we predict `electricity price` for the next 24 hours?
 ## To Do:
     - create inferencing script such that it fetch the required data and predict electricty price for next 24 hours
     - host the inferencing script and make it run daily to predict for next 24 hours
-    - store the daily inferencing results and check the performance against the actual electricity price
+    - store the daily inferencing results and check the performance against the actual pool price
 
 
 ## Links:
-
-- [AESO Developer API](https://developer-apim.aeso.ca/apis)
-- [AESO ETS](http://ets.aeso.ca/)
-- [AESO Historical Generation Data](https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data)
-- [AESO Box](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5)
-- [Generation Report Live](http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet)
-- [Historical Generation Data](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5/folder/196731538687)
+- [AESO Developer API](https://developer-apim.aeso.ca/apis) 🌐
+- [AESO ETS](http://ets.aeso.ca/) 📊
+- [AESO Historical Generation Data](https://www.aeso.ca/market/market-and-system-reporting/data-requests/historical-generation-data) 📈
+- [AESO Box](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5) 📦
+- [Generation Report Live](http://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet) 📅
+- [Historical Generation Data](https://aeso.app.box.com/s/qofgn9axnnw6uq3ip1goiq2ngb11txe5/folder/196731538687) 📂
 
