@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from datetime import datetime, timezone, timedelta
 
-def get_hourly_temperature(climate_id, start_date, end_date):
+def get_hourly_windspeed(climate_id, start_date, end_date):
   url = "https://api.weather.gc.ca/collections/climate-hourly/items"
   all_temp_data = []
   limit = 10000
@@ -32,7 +32,7 @@ def get_hourly_temperature(climate_id, start_date, end_date):
             all_temp_data.append({
                 # 'Timestamp_utc': pd.to_datetime(properties['UTC_DATE'], utc=True),
                 'Timestamp_mst': pd.to_datetime(properties['LOCAL_DATE']),
-                'Temperature (degree C)': properties.get('TEMP', None)
+                'WIND_SPEED': properties.get('WIND_SPEED', None)
             })
           
         offset += limit
@@ -53,16 +53,12 @@ def get_hourly_temperature(climate_id, start_date, end_date):
 # CALGARY ID : 3031092
 # EDMONTON ID: 3012205 or 3012206
 # FORT MC ID: 3062696
-climate_id = "3031092" 
+climate_id = "3062696" 
 
-start_date = "2021-01-01T00:00:00Z"
+start_date = "2022-01-01T00:00:00Z"
 
-end_date = "2021-12-31T23:00:00Z"
+end_date = "2022-12-31T23:00:00Z"
 
-# print(start_date.split("T")[0].replace("-", ""))
-# print(end_date.split("T")[0].replace("-", ""))
-df = get_hourly_temperature(climate_id, start_date, end_date)
+df = get_hourly_windspeed(climate_id, start_date, end_date)
 # print(df)
-df.to_csv(f'/home/kevin/Downloads/BESS/data/raw_2/temperature_calgary_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
-
-
+df.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2022/windspeed_fortmc_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')

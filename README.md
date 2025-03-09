@@ -12,6 +12,13 @@
 - `requirements.txt`: contains python package requirements information.
 - `README.md`: Project documentation.
 
+## Environment Steup:
+- create virtual environment: `python3 -m venv bess_venv`
+- activate virtual environment: `source bess_venv/bin/activate`
+- install requirements: `pip install -r requirements.txt`
+- to updated the requirement.txt file: `pip freeze > requirements.txt`
+
+
 ## Hypotehsis:
 - Can we predict `electricity price` from `generation (solar, wind, gas & hydro)` and `demand (AIL)` and `inter_tie (MATL, BC, SK)` prediction?
 
@@ -19,7 +26,7 @@
 	- Data:
         Get the data for past 6 month (01/06/2024 - 31/12/2024)
 
-        Targer Variable:
+        Target Variable:
             - actual electricity price: have a python script which fetch actual & predicted price data on hourly basis (CAD/MWH)
 
         Independent Variables:
@@ -59,19 +66,29 @@
 
 
 ## Performance Goal:
-    High prices (>200 $/MWh) will require hig precision (Target > 70%) and high recall (Target > 70%)
-    - price > 200: try to make good performance (MAE < 50) 
-    - 120 < price <= 200: try to keep (MAE < 50)
-    - price < 120: try to keep (MAE < 30)
-    For low prices, the model will require high accuracy.
+    - High prices (>200 $/MWh) will require high precision (Target > 70%) and high recall (Target > 70%)
+        - price > 200: try to make good performance (MAE < 50) 
+        - 120 < price <= 200: try to keep (MAE < 50)
+        - price < 120: try to keep (MAE < 30)
 
-        Several factors causing the price spikes:
+    - Low prices, the model will require high accuracy.
+
+    - Several factors causing the price spikes:
         - Tight supply cushion (low renewable power penetration net to the grid with high demand)
         - Available transfer capacity on interties
         - High AIL  
         - Extreme weather conditions
         - Unexpected major outages such as large generating assets going offline, and transmission congestion due to faults/maintenance outages in the Alberta Interconnected Electric System.
 
+
+## Current Status:
+    - we have LSTM model which can predict electricity price for next 24 hours with good performance
+    
+
+## To Do:
+    - create inferencing script such that it fetch the required data and predict electricty price for next 24 hours
+    - host the inferencing script and make it run daily to predict for next 24 hours
+    - store the daily inferencing results and check the performance against the actual electricity price
 
 
 ## links:
