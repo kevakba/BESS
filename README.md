@@ -1,64 +1,58 @@
 # BESS Problem
 
 ## Project Structure
-
-- `data/`: Contains JSON/csv data files.
-- `scripts/`: Contains Python scripts.
-- `Notebooks/`: Contains Notebooks.
-- `docker/`: Contains docker files.
-- `secret/`: API keys and others
-- `.gitignore`: Specifies files to be ignored by Git.
-- `.venv/`: Contains virtual environment.
-- `requirements.txt`: contains python package requirements information.
-- `README.md`: Project documentation.
+- `.gitignore`: Specifies files to be ignored by Git. 📄
+- `.venv/`: Contains virtual environment. 🐍
+- `airflow`: Contains DAG files. 🌬️
+- `data/`: Contains JSON/csv data files. 📊
+- `docker/`: Contains docker files. 🐳
+- `Notebooks/`: Contains Notebooks. 📓
+- `README.md`: Project documentation. 📚
+- `requirements.txt`: Contains Python package requirements information. 📦
+- `scripts/`: Contains Python scripts. 📝
+- `secret/`: API keys and others. 🔑
 
 ## Environment Steup:
-- create virtual environment: `python3 -m venv bess_venv`
-- activate virtual environment: `source bess_venv/bin/activate`
-- install requirements: `pip install -r requirements.txt`
-- to updated the requirement.txt file: `pip freeze > requirements.txt`
+- Create virtual environment: `python3 -m venv bess_venv` 🐍
+- Activate virtual environment: `source bess_venv/bin/activate` 🚀
+- Install requirements: `pip install -r requirements.txt` 📦
+- To update the `requirements.txt` file: `pip freeze > requirements.txt` 🔄
 
+## Hypotehsis: 
+Can we predict `electricity price` for the next 24 hours?
 
-## Hypotehsis:
-- Can we predict `electricity price` from `generation (solar, wind, gas & hydro)` and `demand (AIL)` and `inter_tie (MATL, BC, SK)` prediction?
+| Feature                         | A. Time Series (Past data X LSTM_Window) | B. Regression (Forecast data X LSTM) |
+|---------------------------------|-----------------------------|----------------------|
+| alberta_internal_load           | ✅ Present                  | ❌ Absent           |
+| lag_terms_AIL                   | ❌ Absent                   | ✅ Present          |
+| forecast_alberta_internal_load  | ✅ Present                  | ✅ Present          |
+| pool_price                      | ✅ Present                  | ❌ Absent           |
+| lag_terms_pool_price            | ❌ Absent                   | ✅ Present          |
+| forecast_pool_price             | ✅ Present                  | ❌ Absent           |
+| rolling_30day_avg_price         | ✅ Present                  | ✅ Present          |
+| solar_generation                | ✅ Present                  | ✅ Present          |
+| wind_generation                 | ✅ Present                  | ✅ Present          |
+| temp_calgary                    | ✅ Present                  | ✅ Present          |
+| temp_edmonton                   | ✅ Present                  | ✅ Present          |
+| temp_fortmc                     | ✅ Present                  | ✅ Present          |
+| ws_calgary                      | ✅ Present                  | ✅ Present          |
+| ws_edmonton                     | ✅ Present                  | ✅ Present          |
+| ws_fortmc                       | ✅ Present                  | ✅ Present          |
+| datetime_                       | ✅ Present                  | ✅ Present          |
+| hour_of_day                     | ✅ Present                  | ✅ Present          |
+| day_of_week                     | ✅ Present                  | ✅ Present          |
+| day_of_month                    | ✅ Present                  | ✅ Present          |
+| week_of_month                   | ✅ Present                  | ✅ Present          |
+| month                           | ✅ Present                  | ✅ Present          |
+| year                            | ✅ Present                  | ✅ Present          |
+| is_winter                       | ✅ Present                  | ✅ Present          |
+
 
 ## Model Training: 
-	- Data:
-        Get the data for past 6 month (01/06/2024 - 31/12/2024)
 
-        Target Variable:
-            - actual electricity price: have a python script which fetch actual & predicted price data on hourly basis (CAD/MWH)
-
-        Independent Variables:
-            - actual demand (AIL): history present & predicted present
-            - actual solar production: history present & predicted present
-            - actual wind production: history present & predicted present
-            - Others_proxy (proxy = AIL - solar - wind): history present & predicted present (for later use)
-            - temperature_Calgary: history present & predicted present
-            - temperature_Edmonton: history present & predicted present
-            - temperature_FortMacmurrey: history present & predicted present
-
-            - inter_tie: history present (non-tested) but not sure of predicted data (model required it for inferencing)
-
-            - actual gas production: Others_proxy would takre care
-            - actual hydro production: Others_proxy would takre care
-
-                        "MC": Maximum Capability
-                        "MBO OUT": Mothball (MBO) outage
-                        "OP OUT": Operational (OP) outage 
-                        "AC": Available Capacity
-                                AC = MC - (MBO OUT + OP OUT)
-                                Others_proxy = predicted_AIL - predicted_solar - predicted_wind
 
 ## Model Inferencing:
-	- demand:
-		- accurately being predicted for next 24 hours
 
-	- electricity price:
-
-	- supply:
-		- solar: accurately being predicted for next 24 hours
-		- wind: accurately being predicted for next 24 hours
 
 ## Tasks:
     - download data for Dec 2024
@@ -81,17 +75,13 @@
         - Unexpected major outages such as large generating assets going offline, and transmission congestion due to faults/maintenance outages in the Alberta Interconnected Electric System.
 
 
-## Current Status:
-    - we have LSTM model which can predict electricity price for next 24 hours with good performance
-    
-
 ## To Do:
     - create inferencing script such that it fetch the required data and predict electricty price for next 24 hours
     - host the inferencing script and make it run daily to predict for next 24 hours
     - store the daily inferencing results and check the performance against the actual electricity price
 
 
-## links:
+## Links:
 
 - [AESO Developer API](https://developer-apim.aeso.ca/apis)
 - [AESO ETS](http://ets.aeso.ca/)
