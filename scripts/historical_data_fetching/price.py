@@ -4,8 +4,8 @@ from datetime import datetime
 import pandas as pd
 
 # Define start_date and end_date as datetime objects
-start_date = '2022-01-01'
-end_date = '2022-12-31'
+start_date = '2020-01-01'
+end_date = '2020-12-31'
 
 try:
     # Construct the URL with the provided dates
@@ -47,7 +47,7 @@ try:
     out['forecast_pool_price'] = flattened_data['forecast_pool_price']
     out['rolling_30day_avg'] = flattened_data['rolling_30day_avg']
     # print(out.head())
-    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2022/price_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
+    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2020/price_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
 
 except Exception as e:
     print(e)

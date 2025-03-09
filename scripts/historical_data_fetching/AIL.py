@@ -3,8 +3,8 @@ import json
 import pandas as pd
 
 # Define start_date and end_date
-start_date = '2022-01-01'
-end_date = '2022-12-31'
+start_date = '2020-01-01'
+end_date = '2020-12-31'
 
 try:
     # Construct the URL with the provided dates
@@ -46,7 +46,7 @@ try:
     out['alberta_internal_load'] = flattened_data['alberta_internal_load']
     out['forecast_alberta_internal_load'] = flattened_data['forecast_alberta_internal_load']
     # print(out.head())
-    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2022/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
+    out.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2020/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
 
 except Exception as e:
     print(e)

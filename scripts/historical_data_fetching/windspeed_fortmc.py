@@ -55,10 +55,10 @@ def get_hourly_windspeed(climate_id, start_date, end_date):
 # FORT MC ID: 3062696
 climate_id = "3062696" 
 
-start_date = "2022-01-01T00:00:00Z"
+start_date = "2020-01-01T00:00:00Z"
 
-end_date = "2022-12-31T23:00:00Z"
+end_date = "2020-12-31T23:00:00Z"
 
 df = get_hourly_windspeed(climate_id, start_date, end_date)
 # print(df)
-df.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2022/windspeed_fortmc_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
+df.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2020/windspeed_fortmc_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
