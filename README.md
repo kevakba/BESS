@@ -54,11 +54,6 @@ Can we predict `electricity price` for the next 24 hours?
 ## Model Inferencing:
 
 
-## Tasks:
-    - download data for Dec 2024
-    - train ML model to predict price using variables solar, wind and demand
-
-
 ## Performance Goal:
     - High prices (>200 $/MWh) will require high precision (Target > 70%) and high recall (Target > 70%)
         - price > 200: try to make good performance (MAE < 50) 
