@@ -1,64 +1,57 @@
 import requests
+from datetime import datetime, timedelta
 import pandas as pd
-from datetime import datetime, timezone, timedelta
 
-def get_hourly_windspeed(climate_id, start_date, end_date):
-  url = "https://api.weather.gc.ca/collections/climate-hourly/items"
-  all_temp_data = []
-  limit = 10000
-  offset = 0
-  
-
-  while True:
+def get_weather_forecast(latitude, longitude):
+    """
+    Fetches the next 24-hour temperature and wind speed forecast for a given location.
+    #Calgary --> latitude=51.0447, longitude=-114.0719
+    #Edmonton --> latitude=53.5501, longitude=-113.4687
+    #FortMcMurray --> latitude=56.7268, longitude=-111.381
+    
+    :param latitude: Latitude of the location (default: Calgary, Canada)
+    :param longitude: Longitude of the location (default: Calgary, Canada)
+    :return: Pandas DataFrame with columns: ['Timestamp', 'Temperature (°C)', 'Wind Speed (km/h)']
+    """
+    # Define the API endpoint and parameters
+    endpoint = 'https://api.open-meteo.com/v1/forecast'
     params = {
-      "CLIMATE_IDENTIFIER": climate_id,
-      "datetime": f"{start_date}/{end_date}",
-      "limit": limit,
-      "offset": offset,
-      "f": "json"
+        'latitude': latitude,
+        'longitude': longitude,
+        'hourly': ['temperature_2m', 'windspeed_10m'],
+        'timezone': 'America/Edmonton'
     }
 
-    try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        data = response.json()
+    # Make the API request
+    response = requests.get(endpoint, params=params)
+    
+    # Check for successful response
+    if response.status_code != 200:
+        print("Error fetching data:", response.text)
+        return None
+    
+    data = response.json()
+    
+    # Extract forecast data
+    hourly_times = data['hourly']['time'][24:48]  # Next 48 hours
+    hourly_temps = data['hourly']['temperature_2m'][24:48]
+    hourly_windspeeds = data['hourly']['windspeed_10m'][24:48]
 
-        if not data['features']:
-          break
-        # for f in data['features']:
-        #    print(f)
-        for feature in data['features']:
-            properties = feature['properties']
-            all_temp_data.append({
-                # 'Timestamp_utc': pd.to_datetime(properties['UTC_DATE'], utc=True),
-                'Timestamp_mst': pd.to_datetime(properties['LOCAL_DATE']),
-                'WIND_SPEED': properties.get('WIND_SPEED', None)
-            })
-          
-        offset += limit
+    # Convert time to datetime format
+    timestamps = [datetime.fromisoformat(time) for time in hourly_times]
 
-    except requests.exceptions.HTTPError as err:
-        print(f"HTTP error occurred: {err}")
-        break
-    except Exception as err:
-        print(f"Other error occurred: {err}")
-        break
-  temp_df = pd.DataFrame(all_temp_data)
-  # print(temp_df.head())
-  temp_df = temp_df.sort_values(by='Timestamp_mst')
+    # Create a Pandas DataFrame
+    forecast_df = pd.DataFrame({
+        'Timestamp': timestamps,
+        # 'Temperature (°C)': hourly_temps,
+        'Wind Speed (km/h)': hourly_windspeeds
+    })
 
-  return temp_df
-  
-# Example
-# CALGARY ID : 3031092
-# EDMONTON ID: 3012205 or 3012206
-# FORT MC ID: 3062696
-climate_id = "3012206" 
+    return forecast_df
 
-start_date = "2023-01-01T00:00:00Z"
 
-end_date = "2023-12-31T23:00:00Z"
+df = get_weather_forecast(latitude=53.5501, longitude=-113.4687)
+start_date = df['Timestamp'].min()
+end_date = df['Timestamp'].max()
 
-df = get_hourly_windspeed(climate_id, start_date, end_date)
-# print(df)
-df.to_csv(f'/home/kevin/Downloads/BESS/data/raw/2023/windspeed_edmonton_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
+df.to_csv(f'/home/kevin/Downloads/BESS/data/raw/forecast/windspeed_edmonton_{str(start_date).split(" ")[0].replace("-", "")}_{str(end_date).split(" ")[0].replace("-", "")}.csv')
