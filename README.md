@@ -18,7 +18,7 @@
 - Install requirements: `pip install -r requirements.txt` 📦
 - To update the `requirements.txt` file: `pip freeze > requirements.txt` 🔄
 
-## Hypotehsis: 
+## Hypothesis: 
 Can we predict `electricity price` for the next 24 hours?
 
 | Feature                         | A. Time Series (Past data X LSTM_Window) | B. Regression (Forecast data X LSTM) |
