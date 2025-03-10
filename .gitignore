@@ -13,9 +13,10 @@ __pycache__/
 
 # virtual environment
 .venv/
+bess_venv/
 
 # catboost
 Notebooks/catboost_info
 
 # large data files
-large_files/
+data/large_files/
