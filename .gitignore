@@ -20,3 +20,6 @@ Notebooks/catboost_info
 
 # large data files
 data/large_files/
+
+# mlflow
+Notebooks/TS models/mlruns/
