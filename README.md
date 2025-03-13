@@ -12,11 +12,13 @@
 - `scripts/`: Contains Python scripts. 📝
 - `secret/`: API keys and others. 🔑
 
-## Environment Steup:
+## Environment Setup:
+
 - Create virtual environment: `python3 -m venv bess_venv` 🐍
 - Activate virtual environment: `source bess_venv/bin/activate` 🚀
 - Install requirements: `pip install -r requirements.txt` 📦
 - To update the `requirements.txt` file: `pip freeze > requirements.txt` 🔄
+- Go into notebook folder and run `mlflow ui --port 5001` 📊
 
 ## Hypothesis: 
 Can we predict `electricity price` for the next 24 hours?
