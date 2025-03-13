@@ -2,7 +2,12 @@ import pandas as pd
 import time
 
 url = 'http://ets.aeso.ca/Market/Reports/Manual/Operations/prodweb_reports/wind_solar_forecast/solar_rpt_longterm.csv'
-date_ = '2025-03-10'
+# Get the current date and add one day to it
+current_date = datetime.now()
+next_date = current_date + timedelta(days=1)
+date_ = next_date.strftime('%Y-%m-%d')
+
+# date_ = '2025-03-10'
 result_df = pd.DataFrame()
 
 while result_df.empty:

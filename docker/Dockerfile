@@ -4,12 +4,15 @@ FROM python:3.10
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy project files to the container
-COPY . /app
+# Copy requirements.txt to the container
+COPY requirements.txt /app/
 
 # Install required Python libraries
 RUN pip install --upgrade pip && \
-    pip install numpy pandas scikit-learn matplotlib seaborn jupyterlab tensorflow
+    pip install -r requirements.txt
+
+# Copy the rest of the project files to the container
+COPY . /app
 
 # Expose Jupyter Notebook port
 EXPOSE 8888

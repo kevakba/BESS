@@ -1,10 +1,13 @@
 import urllib.request
 import json
 import pandas as pd
+from datetime import datetime, timedelta
 
-# Define start_date and end_date
-start_date = '2025-03-10'
-end_date = '2025-03-10'
+# Get the current date and add one day to it
+current_date = datetime.now()
+next_date = current_date + timedelta(days=1)
+start_date = next_date.strftime('%Y-%m-%d')
+end_date = next_date.strftime('%Y-%m-%d')
 
 try:
     # Construct the URL with the provided dates
