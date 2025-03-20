@@ -4,8 +4,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 # Get the current date and add one day to it
-current_date = datetime.now()
-next_date = current_date + timedelta(days=1)
+current_date = datetime.now() + timedelta(hours=-24)
+next_date = datetime.now() + timedelta(hours=24)
 start_date = current_date.strftime('%Y-%m-%d')
 end_date = next_date.strftime('%Y-%m-%d')
 
@@ -38,9 +38,9 @@ try:
     # Flatten the JSON data using the 'return' column
     flattened_data = pd.json_normalize(df['return']['Actual Forecast Report'])
     out['begin_datetime_mpt'] = flattened_data['begin_datetime_mpt'] 
-    out['forecast_alberta_internal_load'] = flattened_data['forecast_alberta_internal_load']
-
-    out = out[(pd.to_datetime(out.begin_datetime_mpt) > current_date) & (pd.to_datetime(out.begin_datetime_mpt) < current_date+ timedelta(hours=24)) ]
+    out['alberta_internal_load'] = flattened_data['forecast_alberta_internal_load']
+    # print(out)
+    out = out[(pd.to_datetime(out.begin_datetime_mpt) >= current_date) & (pd.to_datetime(out.begin_datetime_mpt) <= next_date) ]
 
     out.to_csv(f'/home/kevin/Downloads/BESS/Jobs/Inferencing/data/raw/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
 
