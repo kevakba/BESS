@@ -35,22 +35,22 @@
             - inter_tie: history present (non-tested) but not sure of predicted data (model required it for inferencing)
             - Power transaction from/to grid [Pt,grid] 
             - Power supplied/absorbed by BESS [Pt,batt]
-            - BESS station load [Pt,load]
-            - Current state of charge (SOC) (%)
+            - BESS station load [Pt,load] [0.1 MW]
+            - Current state of charge (SOC) (%) [Let initial value be 0.5]
             - Charging power of BESS (in that interval) [Pt,batt,charge]
             - Discharging power of BESS (in that interval) [Pt,batt,discharge]
 
             
             Constants or coefficients--
             - 
-            - Energy capacity (or ampacity) [Cbatt]
-            - Max & Min SOC (%)
-            - Charging/Discharging efficiency (n)
-            - BESS max charging power [Pt,batt,charge,max]
-            - BESS max discharging power [Pt,batt,discharge,max]
-            - Max power required to be bought
-            - Max power required to be sold
-            - Time interval (Dt)
+            - Energy capacity (or ampacity) [Cbatt] [ 5.016 MWh]
+            - Max & Min SOC (%) [Max 0.95 & Min 0.15]
+            - Charging/Discharging efficiency (n) [0.95]
+            - BESS max charging power [Pt,batt,charge,max] [-2.508 MW]
+            - BESS max discharging power [Pt,batt,discharge,max] [2.508 MW]
+            - Max power required to be bought [-2.608 MW]
+            - Max power required to be sold [2.408 MW]
+            - Time interval in hours (Dt)
 
         Equality constraints:
 
