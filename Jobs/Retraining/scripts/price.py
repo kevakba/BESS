@@ -67,6 +67,6 @@ while chunk_start_date < end_date:
     chunk_start_date = chunk_end_date + relativedelta(days=1)
 
 # Save the concatenated data to a CSV file
-output_file = f'/home/kevin/Downloads/BESS/Jobs/Retraining/data/raw/price_{start_date.strftime("%Y%m%d")}_{end_date.strftime("%Y%m%d")}.csv'
+output_file = f'Jobs/Retraining/data/raw/price_{start_date.strftime("%Y%m%d")}_{end_date.strftime("%Y%m%d")}.csv'
 all_data.to_csv(output_file, index=False)
 print(f"Data saved to {output_file}")

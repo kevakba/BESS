@@ -52,7 +52,7 @@ chunk_start_date = start_date
 all_data = pd.DataFrame()
 
 while chunk_start_date < end_date:
-    chunk_end_date = min(chunk_start_date + relativedelta(years=1), end_date)
+    chunk_end_date = min(chunk_start_date + relativedelta(months=6), end_date)
     chunk_start_str = chunk_start_date.strftime('%Y-%m-%d')
     chunk_end_str = chunk_end_date.strftime('%Y-%m-%d')
 
@@ -66,6 +66,6 @@ while chunk_start_date < end_date:
     chunk_start_date = chunk_end_date + relativedelta(days=1)
 
 # Save the concatenated data to a CSV file
-output_file = f'/home/kevin/Downloads/BESS/Jobs/Retraining/data/raw/AIL_{start_date.strftime("%Y%m%d")}_{end_date.strftime("%Y%m%d")}.csv'
+output_file = f'Jobs/Retraining/data/raw/AIL_{start_date.strftime("%Y%m%d")}_{end_date.strftime("%Y%m%d")}.csv'
 all_data.to_csv(output_file, index=False)
 print(f"Data saved to {output_file}")

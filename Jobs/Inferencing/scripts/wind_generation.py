@@ -26,4 +26,4 @@ while result_df.empty:
 
 current_date = current_date.strftime('%Y-%m-%d')
 next_date = next_date.strftime('%Y-%m-%d')
-result_df.to_csv(f'/home/kevin/Downloads/BESS/Jobs/Inferencing/data/raw/wind_generation_{str(current_date).replace("-", "")}_{str(next_date).replace("-", "")}.csv')
+result_df.to_csv(f'Jobs/Inferencing/data/raw/wind_generation_{str(current_date).replace("-", "")}_{str(next_date).replace("-", "")}.csv')

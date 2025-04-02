@@ -70,6 +70,6 @@ start_date = start_date.strftime('%Y-%m-%d')
 # print(end_date.split("T")[0].replace("-", ""))
 df = get_hourly_temperature(climate_id, start_date, end_date)
 # print(df)
-df.to_csv(f'/home/kevin/Downloads/BESS/Jobs/Retraining/data/raw/temperature_calgary_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
+df.to_csv(f'Jobs/Retraining/data/raw/temperature_calgary_{start_date.split("T")[0].replace("-", "")}_{end_date.split("T")[0].replace("-", "")}.csv')
 
 

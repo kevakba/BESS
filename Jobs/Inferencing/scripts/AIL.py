@@ -42,7 +42,7 @@ try:
     # print(out)
     out = out[(pd.to_datetime(out.begin_datetime_mpt) >= current_date) & (pd.to_datetime(out.begin_datetime_mpt) <= next_date) ]
 
-    out.to_csv(f'/home/kevin/Downloads/BESS/Jobs/Inferencing/data/raw/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
+    out.to_csv(f'Jobs/Inferencing/data/raw/AIL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
 
 except Exception as e:
     print(e)
