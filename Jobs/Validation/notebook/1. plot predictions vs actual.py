@@ -15,10 +15,11 @@ import plotly.express as px
 # %%
 # actual data
 actual = pd.read_csv('Jobs/Validation/data/actual/price.csv')
+actual = actual[['datetime_', 'actual_pool_price']]
 
 # predicted data
 predicted = pd.read_csv('Jobs/Inferencing/data/predictions/pred_df.csv')
-
+predicted = predicted[['datetime_', 'predicted_pool_price']]
 # %%
 # merge data
 data = pd.merge(actual, predicted, on='datetime_', how='inner')
