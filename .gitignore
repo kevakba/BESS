@@ -23,3 +23,14 @@ data/large_files/
 
 # mlflow
 Notebooks/TS models/mlruns/
+
+# vscode
+.vscode/
+
+# ignore all csv files in the Inferencing raw folder
+Jobs/Inferencing/data/raw/*.csv
+
+# ignore all csv files in the Retraining raw folder
+Jobs/Retraining/data/raw/*.csv
+
+
