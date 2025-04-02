@@ -134,26 +134,26 @@ with open(html_file_path, "a") as f:
 # Display a message
 print("Interactive graph and metrics saved as 'actual_vs_predicted_pool_price.html'")
 
-# %%
-# Create an interactive line plot using Plotly
-fig = px.line(data, x='datetime_', y=['actual_pool_price', 'predicted_pool_price'],
-              labels={'value': 'Pool Price', 'datetime_': 'Datetime'},
-              title="Actual vs Predicted Pool Price Over Time",
-              color_discrete_map={'actual_pool_price': 'royalblue', 'predicted_pool_price': 'crimson'})
+# # %%
+# # Create an interactive line plot using Plotly
+# fig = px.line(data, x='datetime_', y=['actual_pool_price', 'predicted_pool_price'],
+#               labels={'value': 'Pool Price', 'datetime_': 'Datetime'},
+#               title="Actual vs Predicted Pool Price Over Time",
+#               color_discrete_map={'actual_pool_price': 'royalblue', 'predicted_pool_price': 'crimson'})
 
-# Update layout for better readability
-fig.update_layout(
-    xaxis_title="Datetime",
-    yaxis_title="Pool Price",
-    legend_title="Legend",
-    template="plotly_white",
-    title_font=dict(size=20, family='Arial', color='black')
-)
+# # Update layout for better readability
+# fig.update_layout(
+#     xaxis_title="Datetime",
+#     yaxis_title="Pool Price",
+#     legend_title="Legend",
+#     template="plotly_white",
+#     title_font=dict(size=20, family='Arial', color='black')
+# )
 
-# Save the interactive plot as an HTML file
-fig.write_html("Jobs/Validation/webpage/actual_vs_predicted_pool_price.html")
+# # Save the interactive plot as an HTML file
+# fig.write_html("Jobs/Validation/webpage/actual_vs_predicted_pool_price.html")
 
-# Display a message
-print("Interactive graph saved as 'actual_vs_predicted_pool_price.html'")
+# # Display a message
+# print("Interactive graph saved as 'actual_vs_predicted_pool_price.html'")
 
 
