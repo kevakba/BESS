@@ -55,6 +55,8 @@ try:
     out_old = pd.read_csv('Jobs/Validation/data/actual/price.csv')
     out = pd.concat([out_old, out], ignore_index=True)
     out.drop_duplicates(subset=['datetime_'], keep='last', inplace=True)
+    out = out.sort_values(by='datetime_', ascending=True)
+    out.reset_index(drop=True, inplace=True)
     out.to_csv(f'Jobs/Validation/data/actual/price.csv', index=False)
 
 except Exception as e:
