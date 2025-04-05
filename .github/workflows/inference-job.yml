@@ -1,0 +1,73 @@
+name: REG Model Inference Job
+
+# on:
+  # push:
+  #   branches:
+  #     - bess_v1.0
+      
+  # schedule:
+  #   # run this job daily at 8 pm MST
+  #   - cron: "0 3 * * *" # 8 pm MST
+
+on:
+  schedule:
+    # Run this job daily at 2 PM MST (21:00 UTC)
+    - cron: "0 21 * * *"
+    
+  workflow_dispatch:   # Enables manual trigger
+
+jobs:
+  inference_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python Scripts Sequentially
+        run: |
+          for script in Jobs/Inferencing/scripts/*.py; do
+            echo "Running $script..."
+            python "$script"
+            echo "Completed $script run..."
+          done
+          python "Jobs/Validation/scripts/price.py"
+
+      - name: Run Python Scripts Sequentially
+        run: |
+          python "Jobs/Inferencing/notebook/1. feature engineering.py"
+          echo "Completed 1. feature engineering.py run..."
+          python "Jobs/Inferencing/notebook/2. data cleaning.py"
+          echo "Completed 2. data cleaning.py run..."
+          python "Jobs/Inferencing/notebook/3. model inferencing.py"
+          echo "Completed 3. model inferencing.py run..."
+          python "Jobs/Validation/notebook/1. plot predictions vs actual.py"
+          echo "Completed 1. plot predictions vs actual.py run..."
+
+
+      # - name: Run Jupyter Notebooks Sequentially
+      #   run: |
+      #     jupyter nbconvert --to notebook --execute "Jobs/Inferencing/notebook/1. feature engineering.ipynb" --inplace
+      #     jupyter nbconvert --to notebook --execute "Jobs/Inferencing/notebook/2. data cleaning.ipynb" --inplace
+      #     jupyter nbconvert --to notebook --execute "Jobs/Inferencing/notebook/3. model inferencing.ipynb" --inplace
+
+      - name: Push Output Files (Optional)
+        run: |
+          git config --global user.name "kevakba"
+          git config --global user.email "akbarikevin@gmail.com"
+          git add .
+          git commit -m "KA - Autorun inference job results"
+          git push origin main || echo "No changes to commit"
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
