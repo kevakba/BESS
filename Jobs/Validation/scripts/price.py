@@ -5,7 +5,7 @@ import pandas as pd
 
 # Define start_date and end_date as datetime objects
 current_date = datetime.now()
-next_date = current_date + timedelta(days=-20)
+next_date = current_date + timedelta(days=-30)
 start_date = next_date.strftime('%Y-%m-%d')
 end_date = current_date.strftime('%Y-%m-%d')
 
@@ -53,6 +53,8 @@ try:
     # out['begin_datetime_mpt'] = out['begin_datetime_mpt'] + timedelta(days=1)
     # print('here........................................')
     out_old = pd.read_csv('Jobs/Validation/data/actual/price.csv')
+    out_old = out_old[['datetime_', 'actual_pool_price']]
+
     out = pd.concat([out_old, out], ignore_index=True)
     out.drop_duplicates(subset=['datetime_'], keep='last', inplace=True)
     out = out.sort_values(by='datetime_', ascending=True)
