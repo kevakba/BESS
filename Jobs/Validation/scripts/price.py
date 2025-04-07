@@ -49,11 +49,12 @@ try:
     # out['rolling_30day_avg_price'] = flattened_data['rolling_30day_avg']
 
     out = out[(pd.to_datetime(out.datetime_) <= current_date) & (pd.to_datetime(out.datetime_) >= next_date) ]
-    
+    # print('.........................................')
     # out['begin_datetime_mpt'] = out['begin_datetime_mpt'] + timedelta(days=1)
     # print('here........................................')
     out_old = pd.read_csv('Jobs/Validation/data/actual/price.csv')
     out_old = out_old[['datetime_', 'actual_pool_price']]
+    out_old['datetime_'] = pd.to_datetime(out_old['datetime_'])
 
     out = pd.concat([out_old, out], ignore_index=True)
     out.drop_duplicates(subset=['datetime_'], keep='last', inplace=True)
