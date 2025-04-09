@@ -1,6 +1,7 @@
 # BESS Problem
 
 ## Project Structure
+- `.github`: contains github action workflows
 - `.gitignore`: Specifies files to be ignored by Git. 📄
 - `.venv/`: Contains virtual environment. 🐍
 - `airflow`: Contains DAG files. 🌬️
