@@ -1,4 +1,4 @@
-name: REG Model Inference Job
+name: REG Model Retraining Job
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:   # Enables manual trigger
 
 jobs:
-  inference_job:
+  retraining_job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -59,7 +59,7 @@ jobs:
           git config --global user.name "kevakba"
           git config --global user.email "akbarikevin@gmail.com"
           git add .
-          git commit -m "KA - Autorun inference job results"
+          git commit -m "KA - Autorun retraining job results"
           git push origin main || echo "No changes to commit"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
