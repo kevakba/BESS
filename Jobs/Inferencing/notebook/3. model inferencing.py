@@ -124,8 +124,12 @@ try:
 except:
     pred_df = pd.DataFrame()
 
+print(pred_df_new)
+
 # concatenate the new predictions with the existing predictions
 pred_df = pd.concat([pred_df, pred_df_new], axis=0, ignore_index=True)
+# drop null values
+pred_df = pred_df.dropna(subset=['predicted_pool_price'])
 # drop duplicates
 pred_df = pred_df.drop_duplicates(subset=['datetime_'], keep='last')
 # sort the dataframe by datetime
