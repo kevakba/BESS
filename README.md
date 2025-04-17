@@ -7,6 +7,7 @@
 - `airflow`: Contains DAG files. 🌬️
 - `data/`: Contains JSON/csv data files. 📊
 - `docker/`: Contains docker files. 🐳
+- `Jobs/`: Contains retrain, inference & evaluation job file
 - `Notebooks/`: Contains Notebooks. 📓
 - `README.md`: Project documentation. 📚
 - `requirements.txt`: Contains Python package requirements information. 📦
