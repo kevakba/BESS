@@ -1,6 +1,6 @@
 '''
 use this command from project home directory to run the app:
-streamlit run Jobs/Validation/app/app.py
+streamlit run Jobs/Evaluation/app/app.py
 '''
 
 import streamlit as st
@@ -35,7 +35,7 @@ show_download = st.sidebar.checkbox("💾 Enable Data Download", value=True)
 # --- Load Data ---
 @st.cache_data
 def load_data():
-    actual = pd.read_csv('Jobs/Validation/data/actual/price.csv')[['datetime_', 'actual_pool_price']]
+    actual = pd.read_csv('Jobs/Evaluation/data/actual/price.csv')[['datetime_', 'actual_pool_price']]
     predicted = pd.read_csv('Jobs/Inferencing/data/predictions/pred_df.csv')[['datetime_', 'predicted_pool_price']]
     df = pd.merge(actual, predicted, on='datetime_', how='inner')
     df.dropna(inplace=True)

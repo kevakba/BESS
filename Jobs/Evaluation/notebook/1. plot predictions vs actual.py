@@ -14,7 +14,7 @@ import plotly.express as px
 
 # %%
 # actual data
-actual = pd.read_csv('Jobs/Validation/data/actual/price.csv')
+actual = pd.read_csv('Jobs/Evaluation/data/actual/price.csv')
 actual = actual[['datetime_', 'actual_pool_price']]
 
 # predicted data
@@ -114,7 +114,7 @@ fig.update_layout(
 )
 
 # Save the interactive plot as an HTML file
-html_file_path = "Jobs/Validation/webpage/actual_vs_predicted_pool_price.html"
+html_file_path = "Jobs/Evaluation/webpage/actual_vs_predicted_pool_price.html"
 fig.write_html(html_file_path)
 
 # Append metrics to the HTML file
@@ -152,7 +152,7 @@ print("Interactive graph and metrics saved as 'actual_vs_predicted_pool_price.ht
 # )
 
 # # Save the interactive plot as an HTML file
-# fig.write_html("Jobs/Validation/webpage/actual_vs_predicted_pool_price.html")
+# fig.write_html("Jobs/Evaluation/webpage/actual_vs_predicted_pool_price.html")
 
 # # Display a message
 # print("Interactive graph saved as 'actual_vs_predicted_pool_price.html'")

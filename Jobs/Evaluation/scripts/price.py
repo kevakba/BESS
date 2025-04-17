@@ -52,7 +52,7 @@ try:
     # print('.........................................')
     # out['begin_datetime_mpt'] = out['begin_datetime_mpt'] + timedelta(days=1)
     # print('here........................................')
-    out_old = pd.read_csv('Jobs/Validation/data/actual/price.csv')
+    out_old = pd.read_csv('Jobs/Evaluation/data/actual/price.csv')
     out_old = out_old[['datetime_', 'actual_pool_price']]
     out_old['datetime_'] = pd.to_datetime(out_old['datetime_'])
 
@@ -60,7 +60,7 @@ try:
     out.drop_duplicates(subset=['datetime_'], keep='last', inplace=True)
     out = out.sort_values(by='datetime_', ascending=True)
     out.reset_index(drop=True, inplace=True)
-    out.to_csv(f'Jobs/Validation/data/actual/price.csv', index=False)
+    out.to_csv(f'Jobs/Evaluation/data/actual/price.csv', index=False)
 
 except Exception as e:
     print(e)
