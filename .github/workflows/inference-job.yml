@@ -13,6 +13,8 @@ on:
   schedule:
     # Run this job daily at 2 PM MST (21:00 UTC)
     - cron: "0 21 * * *"
+    # Run this job daily at 2 AM MST (10:00 UTC)
+    - cron: "0 10 * * *"
     
   workflow_dispatch:   # Enables manual trigger
 
