@@ -2,6 +2,7 @@
 use this command from project home directory to run the app:
 streamlit run Jobs/Validation/app/app.py
 '''
+
 import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
@@ -43,16 +44,6 @@ def load_data():
 
 data = load_data()
 
-# --- Compute Metrics ---
-y_true = data['actual_pool_price']
-y_pred = data['predicted_pool_price']
-
-mae = mean_absolute_error(y_true, y_pred)
-mse = mean_squared_error(y_true, y_pred)
-rmse = np.sqrt(mse)
-mape = (np.abs(y_true - y_pred) / y_true).replace([np.inf, -np.inf], np.nan).dropna().mean() * 100
-r2 = r2_score(y_true, y_pred)
-
 # --- Header ---
 st.markdown(f"""
     <h1 style='text-align: center; color: {"#FFFFFF" if dark_mode else "#2E86AB"};'>📊 Pool Price Prediction Dashboard</h1>
@@ -61,14 +52,6 @@ st.markdown(f"""
     </p>
     <hr style='margin-top: 0px;'>
 """, unsafe_allow_html=True)
-
-# --- Metrics ---
-st.subheader("📌 Model Evaluation Metrics")
-col1, col2, col3, col4 = st.columns(4)
-col1.metric("📏 RMSE", f"{rmse:.2f}")
-col2.metric("📉 MAE", f"{mae:.2f}")
-col3.metric("📈 R² Score", f"{r2:.2f}")
-col4.metric("🧮 MAPE (%)", f"{mape:.2f}")
 
 # --- Date Filter ---
 st.subheader("📅 Filter by Date Range")
@@ -83,9 +66,30 @@ if start_date > end_date:
     filtered_df = data.copy()
 else:
     filtered_df = data[
-        (data['datetime_'] >= pd.to_datetime(start_date)) & 
+        (data['datetime_'] >= pd.to_datetime(start_date)) &
         (data['datetime_'] <= pd.to_datetime(end_date))
     ].copy()
+
+# --- Compute Metrics based on filtered data ---
+y_true_filtered = filtered_df['actual_pool_price']
+y_pred_filtered = filtered_df['predicted_pool_price']
+
+if not y_true_filtered.empty and not y_pred_filtered.empty:
+    mae_filtered = mean_absolute_error(y_true_filtered, y_pred_filtered)
+    mse_filtered = mean_squared_error(y_true_filtered, y_pred_filtered)
+    rmse_filtered = np.sqrt(mse_filtered)
+    mape_filtered = (np.abs(y_true_filtered - y_pred_filtered) / y_true_filtered).replace([np.inf, -np.inf], np.nan).dropna().mean() * 100
+    r2_filtered = r2_score(y_true_filtered, y_pred_filtered)
+
+    # --- Metrics Display for Filtered Data ---
+    st.subheader("📌 Model Evaluation Metrics (Filtered Range)")
+    col1_f, col2_f, col3_f, col4_f = st.columns(4)
+    col1_f.metric("📏 RMSE", f"{rmse_filtered:.2f}")
+    col2_f.metric("📉 MAE", f"{mae_filtered:.2f}")
+    col3_f.metric("📈 R² Score", f"{r2_filtered:.2f}")
+    col4_f.metric("🧮 MAPE (%)", f"{mape_filtered:.2f}")
+else:
+    st.info("No data available for the selected date range to calculate metrics.")
 
 # Add rolling averages if selected
 if show_trend:
