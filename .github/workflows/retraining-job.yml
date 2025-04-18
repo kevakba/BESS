@@ -32,7 +32,7 @@ jobs:
             python "$script"
             echo "Completed $script run..."
           done
-          python "Jobs/Validation/scripts/price.py"
+          python "Jobs/Evaluation/scripts/price.py"
 
       - name: Run Python Scripts Sequentially
         run: |
@@ -44,7 +44,7 @@ jobs:
           echo "Completed 3. data cleaning run..."
           python "Jobs/Retraining/notebook/4. LSTM modeling.py"
           echo "Completed 4. LSTM modeling run..."
-          python "Jobs/Validation/notebook/1. plot predictions vs actual.py"
+          python "Jobs/Evaluation/notebook/1. plot predictions vs actual.py"
           echo "Completed 1. plot predictions vs actual run..."
 
 

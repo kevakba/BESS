@@ -13,7 +13,7 @@ on:
   schedule:
     # Run this job daily at 2 PM MST (21:00 UTC)
     - cron: "0 21 * * *"
-    # Run this job daily at 2 AM MST (10:00 UTC)
+    # Run this job daily at 3 AM MST (10:00 UTC)
     - cron: "0 10 * * *"
     
   workflow_dispatch:   # Enables manual trigger
@@ -44,7 +44,7 @@ jobs:
             python "$script"
             echo "Completed $script run..."
           done
-          python "Jobs/Validation/scripts/price.py"
+          python "Jobs/Evaluation/scripts/price.py"
 
       - name: Run Python Scripts Sequentially
         run: |
@@ -54,7 +54,7 @@ jobs:
           echo "Completed 2. data cleaning.py run..."
           python "Jobs/Inferencing/notebook/3. model inferencing.py"
           echo "Completed 3. model inferencing.py run..."
-          python "Jobs/Validation/notebook/1. plot predictions vs actual.py"
+          python "Jobs/Evaluation/notebook/1. plot predictions vs actual.py"
           echo "Completed 1. plot predictions vs actual.py run..."
 
 

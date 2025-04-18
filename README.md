@@ -7,6 +7,7 @@
 - `airflow`: Contains DAG files. 🌬️
 - `data/`: Contains JSON/csv data files. 📊
 - `docker/`: Contains docker files. 🐳
+- `Jobs/`: Contains retrain, inference & evaluation job file
 - `Notebooks/`: Contains Notebooks. 📓
 - `README.md`: Project documentation. 📚
 - `requirements.txt`: Contains Python package requirements information. 📦
@@ -20,6 +21,7 @@
 - Install requirements: `pip install -r requirements.txt` 📦
 - To update the `requirements.txt` file: `pip freeze > requirements.txt` 🔄
 - Go into notebook folder and run `mlflow ui --port 5001` 📊
+- To run streamlit app: `streamlit run Jobs/Evaluation/app/app.py`
 
 ## Hypothesis: 
 Can we predict `electricity price` for the next 24 hours?
