@@ -33,4 +33,7 @@ Jobs/Inferencing/data/raw/*.csv
 # ignore all csv files in the Retraining raw folder
 Jobs/Retraining/data/raw/*.csv
 
+# ignore actual AIL csv
+Jobs/Evaluation/data/actual/AIL.csv
+
 

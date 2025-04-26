@@ -1,5 +1,5 @@
 '''
-use this command from project home directory to run the app:
+Use this command from the project home directory to run the app:
 streamlit run Jobs/Evaluation/app/app.py
 '''
 
@@ -7,6 +7,8 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
 import numpy as np
+import subprocess
+import os
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # --- Page Config ---
@@ -19,18 +21,13 @@ st.set_page_config(
 # --- Sidebar ---
 st.sidebar.title("⚙️ Dashboard Settings")
 
-# Dark Mode
 dark_mode = st.sidebar.toggle("🌙 Enable Dark Mode", value=False)
-
-# Trendline Option
 show_trend = st.sidebar.checkbox("📉 Add Rolling Average Trendline")
-
-# Rolling window size
 if show_trend:
     window_size = st.sidebar.slider("📏 Rolling Window Size (days)", min_value=3, max_value=30, value=7)
 
-# Download Option
 show_download = st.sidebar.checkbox("💾 Enable Data Download", value=True)
+show_ail = st.sidebar.checkbox("📊 Show AIL Data Plot", value=True)
 
 # --- Load Data ---
 @st.cache_data
@@ -57,9 +54,9 @@ st.markdown(f"""
 st.subheader("📅 Filter by Date Range")
 col1, col2 = st.columns(2)
 with col1:
-    start_date = st.date_input("Start date", data['datetime_'].min())
+    start_date = st.date_input("Start date", data['datetime_'].min().date())
 with col2:
-    end_date = st.date_input("End date", data['datetime_'].max())
+    end_date = st.date_input("End date", data['datetime_'].max().date())
 
 if start_date > end_date:
     st.warning("🚫 Start date must be before end date.")
@@ -70,7 +67,7 @@ else:
         (data['datetime_'] <= pd.to_datetime(end_date))
     ].copy()
 
-# --- Compute Metrics based on filtered data ---
+# --- Compute Metrics ---
 y_true_filtered = filtered_df['actual_pool_price']
 y_pred_filtered = filtered_df['predicted_pool_price']
 
@@ -81,7 +78,6 @@ if not y_true_filtered.empty and not y_pred_filtered.empty:
     mape_filtered = (np.abs(y_true_filtered - y_pred_filtered) / y_true_filtered).replace([np.inf, -np.inf], np.nan).dropna().mean() * 100
     r2_filtered = r2_score(y_true_filtered, y_pred_filtered)
 
-    # --- Metrics Display for Filtered Data ---
     st.subheader("📌 Model Evaluation Metrics (Filtered Range)")
     col1_f, col2_f, col3_f, col4_f = st.columns(4)
     col1_f.metric("📏 RMSE", f"{rmse_filtered:.2f}")
@@ -91,54 +87,73 @@ if not y_true_filtered.empty and not y_pred_filtered.empty:
 else:
     st.info("No data available for the selected date range to calculate metrics.")
 
-# Add rolling averages if selected
+# --- Add trendlines ---
 if show_trend:
     filtered_df['actual_rolling'] = filtered_df['actual_pool_price'].rolling(window=window_size).mean()
     filtered_df['predicted_rolling'] = filtered_df['predicted_pool_price'].rolling(window=window_size).mean()
 
-# --- Chart Section ---
-st.subheader("📊 Actual vs Predicted Pool Prices Over Time")
+# --- Pool Price Plot ---
+st.subheader("📊 Actual vs Predicted Pool Prices")
 
-fig = go.Figure()
+price_fig = go.Figure()
+price_fig.add_trace(go.Scatter(x=filtered_df['datetime_'], y=filtered_df['actual_pool_price'], mode='lines+markers', name='Actual', line=dict(color='green')))
+price_fig.add_trace(go.Scatter(x=filtered_df['datetime_'], y=filtered_df['predicted_pool_price'], mode='lines+markers', name='Predicted', line=dict(color='blue')))
 
-# Actual & Predicted lines
-fig.add_trace(go.Scatter(
-    x=filtered_df['datetime_'], y=filtered_df['actual_pool_price'],
-    mode='lines+markers', name='Actual', line=dict(color='green')
-))
-fig.add_trace(go.Scatter(
-    x=filtered_df['datetime_'], y=filtered_df['predicted_pool_price'],
-    mode='lines+markers', name='Predicted', line=dict(color='blue')
-))
-
-# Trendlines
 if show_trend:
-    fig.add_trace(go.Scatter(
-        x=filtered_df['datetime_'], y=filtered_df['actual_rolling'],
-        mode='lines', name=f'Actual {window_size}d Rolling Avg', line=dict(color='lightgreen', dash='dash')
-    ))
-    fig.add_trace(go.Scatter(
-        x=filtered_df['datetime_'], y=filtered_df['predicted_rolling'],
-        mode='lines', name=f'Predicted {window_size}d Rolling Avg', line=dict(color='skyblue', dash='dash')
-    ))
+    price_fig.add_trace(go.Scatter(x=filtered_df['datetime_'], y=filtered_df['actual_rolling'], mode='lines', name=f'Actual {window_size}d Avg', line=dict(color='lightgreen', dash='dash')))
+    price_fig.add_trace(go.Scatter(x=filtered_df['datetime_'], y=filtered_df['predicted_rolling'], mode='lines', name=f'Predicted {window_size}d Avg', line=dict(color='skyblue', dash='dash')))
 
-# Chart Layout
-fig.update_layout(
-    title="Actual vs Predicted Over Time",
+price_fig.update_layout(
+    title="Actual vs Predicted Pool Prices",
     xaxis_title="Date",
-    yaxis_title="Pool Price",
-    hovermode="x unified",
+    yaxis_title="Price",
     template="plotly_dark" if dark_mode else "plotly_white",
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+    hovermode="x unified"
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(price_fig, use_container_width=True)
 
-# --- Table ---
-with st.expander("🗂️ Show Filtered Data Table"):
+# --- AIL Section ---
+if show_ail:
+    st.subheader("📈 Alberta Internal Load (AIL)")
+
+    # Format dates for CLI
+    start_str = pd.to_datetime(start_date).strftime('%Y-%m-%d')
+    end_str = pd.to_datetime(end_date).strftime('%Y-%m-%d')
+
+    # Run AIL script
+    script_path = os.path.abspath("Jobs/Evaluation/scripts/AIL.py")
+    try:
+        subprocess.run(["python3", script_path, start_str, end_str], check=True)
+    except Exception as e:
+        st.error(f"Error running AIL.py: {e}")
+
+    # Load AIL data
+    try:
+        ail_path = "Jobs/Evaluation/data/actual/AIL.csv"
+        ail_df = pd.read_csv(ail_path)
+        ail_df['datetime_'] = pd.to_datetime(ail_df['begin_datetime_mpt'])
+
+        # Plot AIL
+        ail_fig = go.Figure()
+        ail_fig.add_trace(go.Scatter(x=ail_df['datetime_'], y=ail_df['alberta_internal_load'], mode='lines', name='AIL', line=dict(color='orange')))
+        ail_fig.update_layout(
+            title="Alberta Internal Load (AIL)",
+            xaxis_title="Date",
+            yaxis_title="Load",
+            template="plotly_dark" if dark_mode else "plotly_white",
+            hovermode="x unified"
+        )
+        st.plotly_chart(ail_fig, use_container_width=True)
+
+    except Exception as e:
+        st.warning(f"Could not load AIL data: {e}")
+
+# --- Data Table ---
+with st.expander("🗂️ Show Filtered Price Data Table"):
     st.dataframe(filtered_df, use_container_width=True)
 
-# --- Download Section ---
+# --- Download ---
 if show_download:
     st.markdown("### 💾 Download Full Merged Dataset")
     csv = data.to_csv(index=False).encode('utf-8')
