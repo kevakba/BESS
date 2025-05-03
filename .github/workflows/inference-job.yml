@@ -58,6 +58,9 @@ jobs:
           echo "Completed 1. plot predictions vs actual.py run..."
 
 
+    # python "Jobs/Inferencing/notebook/BESS_Optimization.py"
+    # echo "Completed BESS_Optimization run..."
+
       # - name: Run Jupyter Notebooks Sequentially
       #   run: |
       #     jupyter nbconvert --to notebook --execute "Jobs/Inferencing/notebook/1. feature engineering.ipynb" --inplace

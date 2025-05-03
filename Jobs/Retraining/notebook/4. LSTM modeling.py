@@ -355,7 +355,7 @@ save_scaler(scaler, save_path)
 
 # %%
 # load inference data
-# inference_data = pd.read_csv('/home/kevin/Downloads/BESS/Jobs/Inferencing/data/raw/merged_df_cleaned.csv')
+# inference_data = pd.read_csv('/home/kevin/Downloads/BESS/Jobs/Inferencing/data/cleaned/merged_df_cleaned.csv')
 
 # %%
 # # Load the saved model
