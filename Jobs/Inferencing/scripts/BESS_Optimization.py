@@ -74,7 +74,7 @@ grid_df = pd.DataFrame(grid_df)
 
 
 #Create the datetime index for the market dataframe in "%Y-%m-%d %H:%M:%S" format
-market_data = pd.read_csv('Jobs/Inferencing/data/raw/merged_df_cleaned.csv')
+market_data = pd.read_csv('Jobs/Inferencing/data/cleaned/merged_df_cleaned.csv')
 pred_df = pd.read_csv('Jobs/Inferencing/data/predictions/pred_df.csv')
 
 merged_df = pd.merge(market_data, pred_df, on='datetime_', how='inner')
@@ -207,7 +207,7 @@ else:
     print("Solution cannot be found.")
 
 # Save the results to CSV files
-output_dir = 'xx/BESS/Jobs/Inferencing/data/processed'
+output_dir = 'Jobs/Inferencing/data/processed/'
 os.makedirs(output_dir, exist_ok=True)
 resultDF.to_csv(os.path.join(output_dir, f'BESS_Optimization_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv'))
 objValueDF.to_csv(os.path.join(output_dir, f'BESS_Optimization_PnL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv'))
