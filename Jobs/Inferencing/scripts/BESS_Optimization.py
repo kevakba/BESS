@@ -50,7 +50,7 @@ df (next 24 hours) --> ['datetime_', 'pool_price', 'alberta_internal_load', 'win
 
 '''
 
-#Defining the dataframes for the battery and grid data
+#Define the dataframes for the battery and grid data
 batt_df = {
     "max_charge_rate": [9.0],  # Example value in MW
     "max_discharge_rate": [9.0],  # Example value in MW
@@ -73,7 +73,13 @@ battery_df = pd.DataFrame(batt_df)
 grid_df = pd.DataFrame(grid_df)
 
 
-#Creating the datetime index for the market dataframe in "%Y-%m-%d %H:%M:%S" format
+#Create the datetime index for the market dataframe in "%Y-%m-%d %H:%M:%S" format
+market_data = pd.read_csv('Jobs/Inferencing/data/raw/merged_df_cleaned.csv')
+pred_df = pd.read_csv('Jobs/Inferencing/data/predictions/pred_df.csv')
+
+merged_df = pd.merge(market_data, pred_df, on='datetime_', how='inner')
+
+df=merged_df[['datetime_', 'predicted_pool_price', 'forecast_alberta_internal_load', 'wind_forecast', 'solar_forecast']]
 
 market1DF = df.copy()
 market1DF.sort_values(by=["datetime_"], inplace=True)
@@ -83,7 +89,7 @@ market1DF.set_index("time_string", inplace=True)
 marketDF = market1DF
 
 
-#Converting all the dataframes to dictionaries
+#Converte all the dataframes to dictionaries
 marketDict = marketDF.to_dict()
 gridDict = grid_df.to_dict()
 battDict = battery_df.to_dict()
@@ -139,8 +145,8 @@ for i in range(tIndex):
     t = time[i]
 
     # Grid constraints
-    solver.Add(vGrid[i] == input_data["market"]["alberta_internal_load"].get(t, 0) - input_data["market"]["solar_generation"].get(t, 0) -
-               input_data["market"]["wind_generation"].get(t, 0) - vBattPower[i])  
+    solver.Add(vGrid[i] == input_data["market"]["predicted_alberta_internal_load"].get(t, 0) - input_data["market"]["solar_forecast"].get(t, 0) -
+               input_data["market"]["wind_forecast"].get(t, 0) - vBattPower[i])  
    
     solver.Add(vBattPower[i] == vCharge[i] + vDischarge[i])  
     solver.Add(vCharge[i] >= -input_data["batt"]["max_charge_rate"] * vChargeStatus[i]) 
@@ -162,7 +168,7 @@ obj = 0
 #obj += sum(-[vBattPower[i] * input_data["market"]["pool_price"][time[i]] * dt for i in range(tIndex)])
 for i in range(tIndex):
     t = time[i]
-    pool_price = input_data["market"]["pool_price"].get(t, 0)
+    pool_price = input_data["market"]["predicted_pool_price"].get(t, 0)
     #pool_price = input_data["market"]["pool_price"].get(t, 0)  # Use .get() to handle missing keys
     obj += vBattPower[i] * pool_price * dt  # Accumulate the objective function
 solver.Maximize(obj)
@@ -187,7 +193,7 @@ if status == solver.OPTIMAL or status == solver.FEASIBLE:
     
     objValueDF = pd.DataFrame.from_dict({"obj_value": objValue}, orient="index", columns=["Total P&L of BESS Operation ($)"])
     
-    result = list(zip([round(input_data["market"]["pool_price"].get(time[i], 0), 2) for i in range(tIndex)],
+    result = list(zip([round(input_data["market"]["predicted_pool_price"].get(time[i], 0), 2) for i in range(tIndex)],
                       [round(vGrid[i].solution_value(), 2) for i in range(tIndex)], 
                       [round(vBattPower[i].solution_value(), 2) for i in range(tIndex)],
                       [round(vCharge[i].solution_value(), 2) for i in range(tIndex)],
