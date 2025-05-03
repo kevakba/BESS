@@ -207,6 +207,7 @@ if status == solver.OPTIMAL or status == solver.FEASIBLE:
     resultDF = pd.DataFrame(result, index=timestamp, columns=["pool_price ($/MWh)","Grid Power Flow (MW)", "Battery Output (MW)", "Charging Power (MW)", "Discharging Power (MW)", "State-of-charge (SOC)", "Charge Status"])
     
 else:
+    resultDF = pd.DataFrame()
     print("Solution cannot be found.")
 
 # Save the results to CSV files
