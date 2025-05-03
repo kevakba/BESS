@@ -74,6 +74,6 @@ print(df.datetime_.min(), '-------------------------to-------------------------'
 
 
 # %%
-df.to_csv('Jobs/Inferencing/data/raw/merged_df_cleaned.csv', index=False)
+df.to_csv('Jobs/Inferencing/data/cleaned/merged_df_cleaned.csv', index=False)
 
 

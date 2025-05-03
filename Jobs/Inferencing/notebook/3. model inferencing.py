@@ -50,7 +50,7 @@ else:
 
 # %%
 # load inference data
-inference_data = pd.read_csv('Jobs/Inferencing/data/raw/merged_df_cleaned.csv')
+inference_data = pd.read_csv('Jobs/Inferencing/data/cleaned/merged_df_cleaned.csv')
 
 # %% [markdown]
 # #### Model Inferencing
