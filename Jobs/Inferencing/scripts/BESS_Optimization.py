@@ -79,7 +79,7 @@ pred_df = pd.read_csv('Jobs/Inferencing/data/predictions/pred_df.csv')
 
 merged_df = pd.merge(market_data, pred_df, on='datetime_', how='inner')
 
-df=merged_df[['datetime_', 'predicted_pool_price', 'forecast_alberta_internal_load', 'wind_forecast', 'solar_forecast']]
+df=merged_df[['datetime_', 'predicted_pool_price', 'forecast_alberta_internal_load', 'wind_generation', 'solar_generation']]
 
 market1DF = df.copy()
 market1DF.sort_values(by=["datetime_"], inplace=True)
@@ -145,8 +145,8 @@ for i in range(tIndex):
     t = time[i]
 
     # Grid constraints
-    solver.Add(vGrid[i] == input_data["market"]["predicted_alberta_internal_load"].get(t, 0) - input_data["market"]["solar_forecast"].get(t, 0) -
-               input_data["market"]["wind_forecast"].get(t, 0) - vBattPower[i])  
+    solver.Add(vGrid[i] == input_data["market"]["predicted_alberta_internal_load"].get(t, 0) - input_data["market"]["solar_generation"].get(t, 0) -
+               input_data["market"]["wind_generation"].get(t, 0) - vBattPower[i])  
    
     solver.Add(vBattPower[i] == vCharge[i] + vDischarge[i])  
     solver.Add(vCharge[i] >= -input_data["batt"]["max_charge_rate"] * vChargeStatus[i]) 
