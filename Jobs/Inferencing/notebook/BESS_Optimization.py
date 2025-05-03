@@ -148,7 +148,7 @@ for i in range(tIndex):
     t = time[i]
 
     # Grid constraints
-    solver.Add(vGrid[i] == input_data["market"]["predicted_alberta_internal_load"].get(t, 0) - input_data["market"]["solar_generation"].get(t, 0) -
+    solver.Add(vGrid[i] == input_data["market"]["forecast_alberta_internal_load"].get(t, 0) - input_data["market"]["solar_generation"].get(t, 0) -
                input_data["market"]["wind_generation"].get(t, 0) - vBattPower[i])  
    
     solver.Add(vBattPower[i] == vCharge[i] + vDischarge[i])  
