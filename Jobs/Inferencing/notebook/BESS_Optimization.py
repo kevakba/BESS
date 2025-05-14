@@ -80,6 +80,8 @@ pred_df = pd.read_csv('Jobs/Inferencing/data/predictions/pred_df.csv')
 merged_df = pd.merge(market_data, pred_df, on='datetime_', how='inner')
 
 df=merged_df[['datetime_', 'predicted_pool_price', 'forecast_alberta_internal_load', 'wind_generation', 'solar_generation']]
+
+df.fillna(0, inplace=True)
 #Convert the datetime column to datetime format and sort the dataframe by time
 df['datetime_'] = pd.to_datetime(df['datetime_'])
 # df.sort_values(by=["datetime_"], inplace=True)
