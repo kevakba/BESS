@@ -36,7 +36,7 @@ from ortools.linear_solver import pywraplp
 # Get the current date and add one day to it
 current_date = datetime.now()
 next_date = current_date + timedelta(days=1)
-start_date = next_date.strftime('%Y-%m-%d')
+start_date = current_date.strftime('%Y-%m-%d')
 end_date = next_date.strftime('%Y-%m-%d')
 
 '''
