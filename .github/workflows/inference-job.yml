@@ -56,10 +56,8 @@ jobs:
           echo "Completed 3. model inferencing.py run..."
           python "Jobs/Evaluation/notebook/1. plot predictions vs actual.py"
           echo "Completed 1. plot predictions vs actual.py run..."
-
-
-    # python "Jobs/Inferencing/notebook/BESS_Optimization.py"
-    # echo "Completed BESS_Optimization run..."
+          python "Jobs/Inferencing/notebook/BESS_Optimization.py"
+          echo "Completed BESS_Optimization run..."
 
       # - name: Run Jupyter Notebooks Sequentially
       #   run: |
