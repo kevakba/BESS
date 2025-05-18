@@ -49,7 +49,7 @@ end_date = next_date.strftime('%Y-%m-%d')
 
 def get_last_row_from_latest_bess_csv(output_dir):
     # Pattern to match the BESS_Optimization CSV files
-    pattern = re.compile(f'BESS_Optimization_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv')
+    pattern = re.compile(r'^BESS_Optimization_\d{8}_\d{8}\.csv$')
 
     # List all matching CSV files in the directory
     files = [f for f in os.listdir(output_dir) if pattern.match(f)]
