@@ -31,6 +31,7 @@ from datetime import datetime, timedelta
 import os
 import numpy as np
 import timeit
+import re
 from ortools.linear_solver import pywraplp
 
 # Get the current date and add one day to it
@@ -38,6 +39,43 @@ current_date = datetime.now()
 next_date = current_date + timedelta(days=1)
 start_date = current_date.strftime('%Y-%m-%d')
 end_date = next_date.strftime('%Y-%m-%d')
+
+# Save the results to CSV files
+output_dir = 'Jobs/Inferencing/data/processed/'
+os.makedirs(output_dir, exist_ok=True)
+
+#Function to get the last row from the latest BESS_Optimization CSV file and return the last SOC value
+
+def get_last_row_from_latest_bess_csv(output_dir):
+    # Pattern to match the BESS_Optimization CSV files
+    pattern = re.compile(r'^BESS_Optimization_\d{8}_\d{8}\.csv$')
+
+    # List all matching CSV files in the directory
+    files = [f for f in os.listdir(output_dir) if pattern.match(f)]
+
+    if not files:
+        raise FileNotFoundError("No matching BESS_Optimization CSV files found in the output directory.")
+
+    # Sort files by modified time to get the latest one
+    latest_file = max(files, key=lambda f: os.path.getmtime(os.path.join(output_dir, f)))
+
+    # Read the latest CSV into a DataFrame
+    latest_path = os.path.join(output_dir, latest_file)
+    df = pd.read_csv(latest_path)
+
+    if df.empty:
+        raise ValueError("The latest CSV file is empty.")
+
+    # Return the last row as a Series
+    return df.iloc[-1]
+
+last_row = get_last_row_from_latest_bess_csv(output_dir)
+
+# Extract the last SOC value from the latest results CSV file and assign it as the initial SOC for the next run
+if 'State-of-charge (SOC)' in last_row and not pd.isna(last_row['State-of-charge (SOC)']):
+    iSoC = last_row['State-of-charge (SOC)']
+else:
+    iSoC = 0.1 # Default value if not found
 
 '''
 # Load the data from the CSV file
@@ -59,7 +97,7 @@ batt_df = {
     "discharge_eff": [0.95],  # Example efficiency
     "min_soc": [0.1],  # Minimum state of charge
     "max_soc": [0.95],  # Maximum state of charge
-    "initial_soc": [0.5]  # Initial state of charge
+    "initial_soc": [iSoC]  # Initial state of charge
 }
 
 grid_df = {
@@ -212,8 +250,6 @@ else:
     resultDF = pd.DataFrame()
     print("Solution cannot be found.")
 
-# Save the results to CSV files
-output_dir = 'Jobs/Inferencing/data/processed/'
-os.makedirs(output_dir, exist_ok=True)
+
 resultDF.to_csv(os.path.join(output_dir, f'BESS_Optimization_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv'))
 objValueDF.to_csv(os.path.join(output_dir, f'BESS_Optimization_PnL_{start_date.replace("-", "")}_{end_date.replace("-", "")}.csv'))
