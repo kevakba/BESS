@@ -176,8 +176,8 @@ merged_df = generate_lagged_features(merged_df, 'alberta_internal_load', 24)
 
 # %%
 # Get the current time in MST
-mst_timezone = pytz.timezone('MST')
-filter_time = datetime.now(mst_timezone)
+# mst_timezone = pytz.timezone('MST')
+filter_time = datetime.now()#datetime.now(mst_timezone)
 
 # Convert to string format if needed
 filter_time_str = filter_time.strftime('%Y-%m-%d %H:%M:%S')
