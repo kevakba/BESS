@@ -12,9 +12,11 @@ name: REG Model Inference Job
 on:
   schedule:
     # Run this job daily at 2 PM MST (21:00 UTC)
-    - cron: "0 21 * * *"
+    # - cron: "0 21 * * *"
     # Run this job daily at 3 AM MST (10:00 UTC)
-    - cron: "0 10 * * *"
+    # - cron: "0 10 * * *"
+    # Run this job daily at 7 AM MST (14:00 UTC)
+    - cron: "0 14 * * *"
     
   workflow_dispatch:   # Enables manual trigger
 
