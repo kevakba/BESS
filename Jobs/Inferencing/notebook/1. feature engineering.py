@@ -8,6 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pytz
+from zoneinfo import ZoneInfo
 
 # Set pandas options to display all rows and columns
 # pd.set_option('display.max_rows', None)
@@ -177,7 +178,8 @@ merged_df = generate_lagged_features(merged_df, 'alberta_internal_load', 24)
 # %%
 # Get the current time in MST
 # mst_timezone = pytz.timezone('MST')
-filter_time = datetime.now()#datetime.now(mst_timezone)
+filter_time = datetime.now(ZoneInfo('UTC'))#datetime.now(mst_timezone)
+filter_time = filter_time.replace(tzinfo=None)
 
 # Convert to string format if needed
 filter_time_str = filter_time.strftime('%Y-%m-%d %H:%M:%S')
