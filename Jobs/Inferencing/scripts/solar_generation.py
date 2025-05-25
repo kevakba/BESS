@@ -23,6 +23,11 @@ while result_df.empty:
 
     break
 
+#Convert the 'Timestamp' column to datetime format and set timezone to UTC   
+result_df['datetime_'] = pd.to_datetime(result_df['datetime_'], format='%Y-%m-%d %H:00')
+result_df['datetime_'] = result_df['datetime_'].dt.tz_localize('America/Edmonton').dt.tz_convert('UTC')
+result_df['datetime_'] = result_df['datetime_'].dt.strftime('%Y-%m-%d %H:00')
+
 current_date = current_date.strftime('%Y-%m-%d')
 next_date = next_date.strftime('%Y-%m-%d')
 result_df.to_csv(f'Jobs/Inferencing/data/raw/solar_generation_{str(current_date).replace("-", "")}_{str(next_date).replace("-", "")}.csv')

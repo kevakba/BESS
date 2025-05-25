@@ -56,6 +56,10 @@ df = forecast_df_calgary = get_weather_forecast(latitude=51.0447, longitude=-114
 start_date = df['Timestamp'].min()
 end_date = df['Timestamp'].max()
 
+#Convert the 'Timestamp' column to datetime format and set timezone to UTC
+df['Timestamp'] = df['Timestamp'].dt.tz_localize('America/Edmonton').dt.tz_convert('UTC')
+df['Timestamp'] = df['Timestamp'].dt.strftime('%Y-%m-%d %H:00')
+
 # print('completed..')
 df[['Timestamp', 'Temperature (°C)']].to_csv(f'Jobs/Inferencing/data/raw/temperature_calgary_{str(start_date).split(" ")[0].replace("-", "")}_{str(end_date).split(" ")[0].replace("-", "")}.csv')
 
