@@ -21,7 +21,7 @@ st.set_page_config(
 # --- Sidebar ---
 st.sidebar.title("⚙️ Dashboard Settings")
 
-dark_mode = st.sidebar.toggle("🌙 Enable Dark Mode", value=False)
+dark_mode = st.sidebar.checkbox("🌙 Enable Dark Mode", value=False)
 show_trend = st.sidebar.checkbox("📉 Add Rolling Average Trendline")
 if show_trend:
     window_size = st.sidebar.slider("📏 Rolling Window Size (days)", min_value=3, max_value=30, value=7)
