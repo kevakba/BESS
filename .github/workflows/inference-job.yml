@@ -27,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: AG_TimeTest
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -73,6 +73,6 @@ jobs:
           git config --global user.email "akbarikevin@gmail.com"
           git add .
           git commit -m "KA - Autorun inference job results"
-          git push origin AG_TimeTest || echo "No changes to commit"
+          git push origin main || echo "No changes to commit"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
