@@ -2,7 +2,7 @@ import urllib.request
 import json
 import pandas as pd
 from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
+from backports.zoneinfo import ZoneInfo
 
 # Get the current date and add one day to it
 #current_date = datetime.now() + timedelta(hours=-24)

@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pytz
-from zoneinfo import ZoneInfo
+from backports.zoneinfo import ZoneInfo
 
 # Set pandas options to display all rows and columns
 # pd.set_option('display.max_rows', None)
@@ -86,8 +86,13 @@ for df_name in df_list:
         globals()[df_name]['datetime_'] = pd.to_datetime(globals()[df_name]['datetime_'])
         # display(globals()[df_name].head())
     except:
-        globals()[df_name]['datetime_'] = pd.to_datetime(globals()[df_name]['Timestamp'])
-        globals()[df_name].drop(['Timestamp'], axis=1, inplace=True)
+        try:
+            globals()[df_name]['datetime_'] = pd.to_datetime(globals()[df_name]['Timestamp'])
+            globals()[df_name].drop(['Timestamp'], axis=1, inplace=True)
+        except:
+            # begin_datetime_utc
+            globals()[df_name]['datetime_'] = pd.to_datetime(globals()[df_name]['begin_datetime_utc'])
+            globals()[df_name].drop(['begin_datetime_utc'], axis=1, inplace=True)
         # display(globals()[df_name].head())
 
 # %%

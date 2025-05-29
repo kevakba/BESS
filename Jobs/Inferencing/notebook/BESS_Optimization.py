@@ -33,10 +33,15 @@ import numpy as np
 import timeit
 import re
 from ortools.linear_solver import pywraplp
+from backports.zoneinfo import ZoneInfo
 
 # Get the current date and add one day to it
-current_date = datetime.now()
+# current_date = datetime.now()
+current_date = datetime.now(ZoneInfo('UTC')) 
+current_date = current_date.replace(tzinfo=None)
+
 next_date = current_date + timedelta(days=1)
+
 start_date = current_date.strftime('%Y-%m-%d')
 end_date = next_date.strftime('%Y-%m-%d')
 

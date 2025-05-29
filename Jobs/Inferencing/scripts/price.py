@@ -2,7 +2,7 @@ import urllib.request
 import json
 from datetime import datetime, timedelta
 import pandas as pd
-from zoneinfo import ZoneInfo
+from backports.zoneinfo import ZoneInfo
 
 # Define start_date and end_date as datetime objects
 #current_date = datetime.now()

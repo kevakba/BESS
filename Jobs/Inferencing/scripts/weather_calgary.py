@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 import pandas as pd
+from backports.zoneinfo import ZoneInfo
 
 def get_weather_forecast(latitude, longitude):
     """
@@ -47,8 +48,6 @@ def get_weather_forecast(latitude, longitude):
         'Wind Speed (km/h)': hourly_windspeeds
     })
 
-    current_date = datetime.now()
-    forecast_df = forecast_df[(pd.to_datetime(forecast_df.Timestamp) > current_date) & (pd.to_datetime(forecast_df.Timestamp) < current_date+ timedelta(hours=24)) ]
     return forecast_df
 
 
@@ -59,6 +58,11 @@ end_date = df['Timestamp'].max()
 #Convert the 'Timestamp' column to datetime format and set timezone to UTC
 df['Timestamp'] = df['Timestamp'].dt.tz_localize('America/Edmonton').dt.tz_convert('UTC')
 df['Timestamp'] = df['Timestamp'].dt.strftime('%Y-%m-%d %H:00')
+
+# current_date = datetime.now()
+current_date = datetime.now(ZoneInfo('UTC')) 
+current_date = current_date.replace(tzinfo=None)
+df = df[(pd.to_datetime(df.Timestamp) > current_date) & (pd.to_datetime(df.Timestamp) < current_date+ timedelta(hours=24)) ]
 
 # print('completed..')
 df[['Timestamp', 'Temperature (°C)']].to_csv(f'Jobs/Inferencing/data/raw/temperature_calgary_{str(start_date).split(" ")[0].replace("-", "")}_{str(end_date).split(" ")[0].replace("-", "")}.csv')
