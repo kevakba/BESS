@@ -105,7 +105,7 @@ if show_trend:
 
 price_fig.update_layout(
     title="Actual vs Predicted Pool Prices",
-    xaxis_title="Date",
+    xaxis_title="Date (MTP)",
     yaxis_title="Price",
     template="plotly_dark" if dark_mode else "plotly_white",
     hovermode="x unified"
@@ -139,7 +139,7 @@ if show_ail:
         ail_fig.add_trace(go.Scatter(x=ail_df['datetime_'], y=ail_df['alberta_internal_load'], mode='lines', name='AIL', line=dict(color='orange')))
         ail_fig.update_layout(
             title="Alberta Internal Load (AIL)",
-            xaxis_title="Date",
+            xaxis_title="Date (MTP)",
             yaxis_title="Load",
             template="plotly_dark" if dark_mode else "plotly_white",
             hovermode="x unified"
