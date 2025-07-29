@@ -1,5 +1,9 @@
 # BESS Problem
 
+## Aim:
+Our goal is to predict hourly electricity prices in Alberta using publicly available AESO (Alberta Electric System Operator) data. We fetch real-time and historical market data from the AESO public API, which is then preprocessed and used to train machine learning models. The model is designed to predict electricity prices for the next 24 hours, starting from the current runtime, enabling better short-term forecasting and decision-making for energy stakeholders.
+
+
 ## Project Structure
 - `.github`: contains github action workflows
 - `.gitignore`: Specifies files to be ignored by Git. 📄
