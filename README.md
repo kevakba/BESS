@@ -25,7 +25,7 @@ Our goal is to predict hourly electricity prices in Alberta using publicly avail
 - Install requirements: `pip install -r requirements.txt` 📦
 - To update the `requirements.txt` file: `pip freeze > requirements.txt` 🔄
 - Go into notebook folder and run `mlflow ui --port 5001` 📊
-- To run streamlit app: `streamlit run Jobs/Evaluation/app/app.py`
+- Demo: `streamlit run Jobs/Evaluation/app/app.py`
 
 ## Hypothesis: 
 Can we predict `electricity price` for the next 24 hours?
